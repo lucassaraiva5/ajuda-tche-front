@@ -21,7 +21,7 @@ class HelpPlaceResource extends Resource
 
     protected static ?string $label = 'posto de ajuda';
 
-    protected static ?string $pluralLabel = 'postos de ajuda';
+    protected static ?string $pluralLabel = 'Postos de ajuda';
 
     protected static bool $hasTitleCaseModelLabel = false;
 
