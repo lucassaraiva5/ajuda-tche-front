@@ -16,34 +16,34 @@ Projeto destinado à ajudar as pessoas atingidas por desastres naturais no Rio G
 
 Clone o projeto com o seguinte comando
 
-´´´
+```
 git clone https://github.com/lucassaraiva5/ajuda-tche-laravel
-´´´
+```
 
 Utilize os comandos abaixo para executar o projeto
 
-´´´
+```
 cd ajuda-tche-laravel
 composer install
 npm i
 php artisan key:generate
-´´´
+```
 
 Edite o arquivo .env para as suas configurações necessarias
 E apos isso o seguinte comando para realizar a migração do DB
 
-´´´
+```
 php artisan migrate
-´´´
+```
 
 ## Para rodar o projeto utilize os seguintes comandos
 
 Terminal 1
-´´´
+```
  php artisan serve
-´´´
+```
 
 Terminal 2
-´´´
+```
 npm run dev
-´´´
+```
