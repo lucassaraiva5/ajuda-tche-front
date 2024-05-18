@@ -161,8 +161,17 @@
                                         </x-input-group-inline>
 
                                         <x-text-input name="who_takes_continuous_medication" label="Quem" placeholder="Nome da pessoa"/>
-
                                         <x-text-input name="what_medicines_is_this_person_taking" label="Quais remédios" placeholder="Nome dos remédios ou composto"/>
+
+                                        <x-input-group-inline wrapperClass="col-span-2" label="Situação do domicílio:">
+                                            <div class="grid grid-cols-2 gap-y-2 gapx-2">
+                                                <x-checkbox-input name="flooding" label="Alagamento" :value="'Alagamento'"/>
+                                                <x-checkbox-input name="damage_to_furniture_appliances" label="Danificação dos móveis/eletrodomésticos" :value="'Danificação dos móveis/eletrodomésticos'"/>
+                                                <x-checkbox-input name="damage_to_walls_floors_structure_roof" label="Danificação das paredes/pisos/estrutura/telhado" :value="'Danificação das paredes/pisos/estrutura/telhado'"/>
+                                                <x-checkbox-input name="loss_of_bed_table_and_bath_belongings" label="Perda de pertences de cama/mesa e banho" :value="'Perda de pertences de cama/mesa e banho'"/>
+                                                <x-checkbox-input name="others" label="Outros" :value="'Outros'"/>
+                                            </div>
+                                        </x-input-group-inline>
                                     </div>
                                 </div>
 
