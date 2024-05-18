@@ -46,13 +46,15 @@ class ProductHelpPlaceResource extends Resource
 
                         if ($productId == null)
                             return [];
-
-                        return Product::query()
-                            ->find($productId)
+                  
+                        return Product::find($productId)
                             ->unitTypes()
-                            ->with(['unitType'])
                             ->get()
-                            ->pluck('unitType.description', 'unitType.id');
+                            ->filter(function ($unitType) {
+                                return $unitType->description !== null;
+                            })
+                            ->pluck('description', 'id')
+                            ->toArray();
                     })
                     ->required(),
                 Forms\Components\Select::make('unit_conversion_id')
@@ -62,12 +64,14 @@ class ProductHelpPlaceResource extends Resource
                         if ($productId == null)
                             return [];
 
-                        return Product::query()
-                            ->find($productId)
+                        return Product::find($productId)
                             ->unitConversions()
-                            ->with(['unitConversion'])
                             ->get()
-                            ->pluck('unitConversion.description', 'unitConversion.id');
+                            ->filter(function ($unitConversion) {
+                                return $unitConversion->description !== null;
+                            })
+                            ->pluck('description', 'id')
+                            ->toArray();
                     })
                     ->required(),
                 Forms\Components\TextInput::make('amount')

@@ -28,8 +28,6 @@ class CityResource extends Resource
 
     protected static ?string $navigationGroup = 'Cadastros';
 
-
-
     public static function form(Form $form): Form
     {
         return $form
@@ -40,11 +38,9 @@ class CityResource extends Resource
                     ->maxLength(100),
                 Forms\Components\Select::make('state_uf')
                     ->label('Estado')
+                    ->searchable()
                     ->options(State::all()->pluck('name', 'id'))
-                    ->required()
-                    ->afterStateUpdated(function (Forms\Set $set) {
-                        $set('states', []);
-                    }),
+                    ->required(),
             ]);
     }
 
@@ -55,16 +51,25 @@ class CityResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nome')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('state_uf')
+                    ->label('UF')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('state.name')
                     ->label('Estado')
                     ->sortable(),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('state_uf')
+                    ->label('Estado')
+                    ->multiple()
+                    ->searchable()
+                    ->options(State::all()->pluck('name', 'uf')),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->iconButton(),
             ])
+            ->defaultSort('name')
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
