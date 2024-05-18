@@ -7,6 +7,7 @@ use App\Filament\Resources\DeliveryResource\RelationManagers;
 use App\Models\Delivery;
 use App\Models\Driver;
 use App\Models\HelpPlace;
+use App\Models\Product;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -43,6 +44,57 @@ class DeliveryResource extends Resource
                 Forms\Components\Select::make('driver_id')
                     ->label('Motorista')
                     ->options(Driver::all()->pluck('name', 'id')),
+
+                Forms\Components\Repeater::make('productDeliveries')
+                    ->relationship()
+                    ->label('Entregas de Produtos')
+                    ->schema([
+                        Forms\Components\Select::make('product_id')
+                            ->label('Produto')
+                            ->live()
+                            ->options(Product::all()->pluck('description', 'id'))
+                            ->required(),
+                        Forms\Components\Select::make('unit_type_id')
+                            ->options(function (Forms\Get $get) {
+                                $productId = $get('product_id');
+        
+                                if ($productId == null)
+                                    return [];
+                          
+                                return Product::find($productId)
+                                    ->unitTypes()
+                                    ->get()
+                                    ->filter(function ($unitType) {
+                                        return $unitType->description !== null;
+                                    })
+                                    ->pluck('description', 'id')
+                                    ->toArray();
+                            })
+                            ->required(),
+
+                        Forms\Components\Select::make('unit_conversion_id')
+                            ->options(function (Forms\Get $get) {
+                                $productId = $get('product_id');
+        
+                                if ($productId == null)
+                                    return [];
+        
+                                return Product::find($productId)
+                                    ->unitConversions()
+                                    ->get()
+                                    ->filter(function ($unitConversion) {
+                                        return $unitConversion->description !== null;
+                                    })
+                                    ->pluck('description', 'id')
+                                    ->toArray();
+                            }),
+
+                        Forms\Components\TextInput::make('amount')
+                            ->label('Quantidade')
+                            ->required()
+                            ->numeric(),
+                    ])
+                    
             ]);
     }
 
