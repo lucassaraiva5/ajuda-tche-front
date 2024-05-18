@@ -86,10 +86,12 @@
                                     </div>
 
                                     <div class="grid grid-cols-2 gap-x-5 gap-y-6">
-                                        <x-text-input name="cep" label="CEP" placeholder="00000-000" x-mask="99999-999"/>
+                                        <x-text-input wrapperClass="col-span-2" name="cep" label="CEP" placeholder="00000-000" x-mask="99999-999"/>
 
-                                        <x-text-input name="address" label="Logradouro" placeholder="Rua, Avenida, etc..." :required="true"/>
-                                        <x-text-input name="number" label="Número" placeholder="Número" :required="true"/>
+                                        <div class="grid grid-cols-4 gap-x-5 gap-y-6 col-span-2">
+                                            <x-text-input wrapperClass="col-span-3" name="address" label="Logradouro" placeholder="Rua, Avenida, etc..." :required="true"/>
+                                            <x-text-input name="number" label="Número" placeholder="Número" :required="true"/>
+                                        </div>
 
                                         <x-text-input name="complement" label="Complemento" placeholder="Complemento"/>
                                         <x-text-input name="neighborhood" label="Bairro" placeholder="Bairro" :required="true"/>
