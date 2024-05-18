@@ -25,7 +25,7 @@ class Delivery extends Model
         return $this->belongsTo(Driver::class);
     }
 
-    public function productDeliveries(): HasMany
+    public function products(): HasMany
     {
         return $this->hasMany(ProductDelivery::class);
     }
