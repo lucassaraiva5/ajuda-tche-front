@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Enums\Gender;
 use Canducci\Cep\CepResponse;
 use Canducci\Cep\Facades\Cep;
 use Illuminate\Contracts\Foundation\Application;
@@ -24,22 +25,13 @@ class PersonRegistration extends Component
     #[Layout('layouts.app')]
     public function render(): Factory|\Illuminate\Foundation\Application|View|Application
     {
-        return view('livewire.person-registration');
-    }
+        $genders = collect(Gender::cases())
+            ->map(fn ($enum) => ['value' => $enum->value, 'label' => $enum->value])
+            ->toArray();
 
-    public function searchByCep(): void
-    {
-        if (str($this->cep)->trim()->isNotEmpty()) {
-            /** @var CepResponse $cep */
-            $cep = Cep::find($this->cep);
-
-            if ($cep->getCepModel() !== null) {
-                $this->address = $cep->getCepModel()->getLogradouro();
-                $this->neighborhood = $cep->getCepModel()->getBairro();
-                $this->uf = $cep->getCepModel()->getUf();
-                $this->city = $cep->getCepModel()->getLocalidade();
-            }
-        }
+        return view('livewire.person-registration', [
+            'genders' => $genders
+        ]);
     }
 
     public function save()

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Alpine from 'alpinejs'
 import mask from '@alpinejs/mask'
+import 'flowbite'
 
 //Axios
 window.axios = axios

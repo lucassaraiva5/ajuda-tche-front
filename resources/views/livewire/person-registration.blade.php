@@ -16,21 +16,64 @@
                                     <p class="font-semibold text-gray-700 text-uppercase mb-7">INFORMAÇÕES PESSOAIS</p>
 
                                     <div class="grid grid-cols-2 gap-x-5 gap-y-6">
-                                        <x-text-input wire:model.live="name" name="name" label="Nome" placeholder="Nome" :required="true"/>
-                                        <x-text-input name="last_name" label="Sobrenome" placeholder="Sobrenome"/>
+                                        <x-text-input wrapperClass="col-span-2" name="cpf" label="CPF" placeholder="CPF" x-mask="999.999.999-99" :required="true"/>
 
-                                        <x-text-input wrapperClass="col-span-2" name="cpf" label="CPF" placeholder="CPF" x-mask="999.999.999-99"/>
+                                        <x-text-input wrapperClass="col-span-2" name="civil_name" label="Nome civil" placeholder="Nome" :required="true"/>
+                                        <x-text-input wrapperClass="col-span-2" name="social_name" label="Nome social" placeholder="Nome"/>
 
                                         <x-text-input wrapperClass="col-span-2" name="mother_name" label="Nome da mãe" placeholder="Nome da mãe"/>
 
-                                        <x-text-input name="date_of_birth" label="Data de nascimento" placeholder="DD/MM/AAAA" x-mask="99/99/9999"/>
-                                        <x-text-input name="gender" label="Gênero" placeholder="Selecione um gênero"/>
+                                        <x-text-input name="date_of_birth" label="Data de nascimento" placeholder="DD/MM/AAAA" x-mask="99/99/9999" :required="true"/>
+                                        <x-select-input name="gender" label="Gênero" placeholder="Selecione um gênero" :required="true" :options="$genders"/>
 
-                                        <x-text-input name="state_of_birth" label="Estado de nascimento" placeholder="Estado"/>
-                                        <x-text-input name="naturalness" label="Naturalidade" placeholder="Cidade"/>
+                                        <x-text-input name="occupation" label="Ocupação" placeholder="Atividade profissional que desempenha" :required="true"/>
+                                        <x-text-input name="income" label="Renda" placeholder="Remuneração mensal que recebe" :required="true"/>
 
                                         <x-text-input name="phone" label="Celular" placeholder="(xx) x xxxx-xxxx" x-mask="(99) 9 9999-9999"/>
                                         <x-text-input type="email" name="email" label="E-mail" placeholder="exemplo@email.com"/>
+
+                                        <x-radio-group-inline label="Possui Cadastro Único">
+                                            <x-radio-input name="has_cadastro_unico" label="Sim" :value="true"/>
+                                            <x-radio-input name="has_cadastro_unico" label="Não" :value="false"/>
+                                        </x-radio-group-inline>
+
+                                        <x-text-input name="nis_number" label="Número NIS" placeholder="Número"/>
+
+                                        <x-radio-group-inline wrapperClass="col-span-2 min-h-[50px]" label="Beneficiário do Bolsa Família">
+                                            <x-radio-input name="has_bolsa_familia" label="Sim" :value="true"/>
+                                            <x-radio-input name="has_bolsa_familia" label="Não" :value="false"/>
+                                        </x-radio-group-inline>
+
+                                        <x-radio-group-inline wrapperClass="col-span-2 min-h-[50px]" label="Já foi contemplado com o Programa Volta por Cima?">
+                                            <x-radio-input name="covered_by_the_program_volta_por_cima" label="Sim" :value="true"/>
+                                            <x-radio-input name="covered_by_the_program_volta_por_cima" label="Não" :value="false"/>
+                                        </x-radio-group-inline>
+
+                                        <x-radio-group-inline label="Acessa alguma cozinha social?">
+                                            <x-radio-input name="access_to_social_kitchen" label="Sim" :value="true"/>
+                                            <x-radio-input name="access_to_social_kitchen" label="Não" :value="false"/>
+                                        </x-radio-group-inline>
+
+                                        <x-text-input name="social_kitchen" label="Qual Cozinha Social" placeholder="Nome da Cozinha Social"/>
+
+                                        <x-radio-group-inline label="Possui alguma deficiência?">
+                                            <x-radio-input name="handicapped" label="Sim" :value="true"/>
+                                            <x-radio-input name="handicapped" label="Não" :value="false"/>
+                                        </x-radio-group-inline>
+
+                                        <x-text-input name="deficiency" label="Tipo de deficiência" placeholder="Cegueira, cadeirante..."/>
+                                    </div>
+                                </div>
+
+                                <div class="mt-16">
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-6 items-center">
+                                        <p class="font-semibold text-gray-700 text-uppercase">COMPOSIÇÃO FAMILIAR</p>
+
+                                        <div class="flex justify-end">
+                                            <button type="button" class="inline-flex items-center justify-center px-6 py-2 mt-2 text-base font-semibold text-white transition-all duration-200 bg-blue-500 border border-transparent rounded-full focus:outline-none hover:bg-blue-700 focus:bg-blue-700">
+                                                Adicionar membro ao grupo
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -43,21 +86,16 @@
                                     </div>
 
                                     <div class="grid grid-cols-2 gap-x-5 gap-y-6">
-                                        <div class="flex items-end col-span-2 gap-x-5">
-                                            <x-text-input wrapperClass="w-full" wire:model="cep" name="cep" label="CEP" placeholder="00000-000" x-mask="99999-999"/>
-                                            <button type="button" wire:click="searchByCep" class="px-4 py-3 bg-blue-500 rounded">
-                                                <x-tabler-search class="h-5 w-5 text-white"/>
-                                            </button>
-                                        </div>
+                                        <x-text-input name="cep" label="CEP" placeholder="00000-000" x-mask="99999-999"/>
 
-                                        <x-text-input wire:model.live="address" name="address" label="Logradouro" placeholder="Rua, Avenida, etc..." :required="true"/>
-                                        <x-text-input wire:model.live="number" name="number" label="Número" placeholder="Número" :required="true"/>
+                                        <x-text-input name="address" label="Logradouro" placeholder="Rua, Avenida, etc..." :required="true"/>
+                                        <x-text-input name="number" label="Número" placeholder="Número" :required="true"/>
 
-                                        <x-text-input wire:model.live="complement" name="complement" label="Complemento" placeholder="Complemento"/>
-                                        <x-text-input wire:model.live="neighborhood" name="neighborhood" label="Bairro" placeholder="Bairro" :required="true"/>
+                                        <x-text-input name="complement" label="Complemento" placeholder="Complemento"/>
+                                        <x-text-input name="neighborhood" label="Bairro" placeholder="Bairro" :required="true"/>
 
-                                        <x-text-input wire:model.live="uf" name="uf" label="Estado" placeholder="Rio Grande do sul" :required="true"/>
-                                        <x-text-input wire:model.live="city" name="city" label="Cidade" placeholder="Selecione uma cidade" :required="true"/>
+                                        <x-text-input name="uf" label="Estado" placeholder="Rio Grande do sul" :required="true"/>
+                                        <x-text-input name="city" label="Cidade" placeholder="Selecione uma cidade" :required="true"/>
                                     </div>
                                 </div>
 
