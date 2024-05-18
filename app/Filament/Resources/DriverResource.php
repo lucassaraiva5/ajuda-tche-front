@@ -36,7 +36,9 @@ class DriverResource extends Resource
                     ->required()
                     ->maxLength(120),
                 Forms\Components\TextInput::make('contactNumber')
-                    ->label('Numero de Telefone')
+                    ->label('Numero de telefone')
+                    ->mask('(99) 99999-9999')
+                    ->placeholder('(DD) 99999-9999')
                     ->required()
                     ->maxLength(20),
             ]);
@@ -46,13 +48,21 @@ class DriverResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Nome')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('contactNumber')
+                    ->label('Número de telefone')
+                    ->sortable()
+                    ->searchable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->iconButton(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
