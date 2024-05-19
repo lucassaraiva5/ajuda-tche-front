@@ -126,7 +126,7 @@
                                             <x-radio-input wire:model.live="form.disabled_family_member" name="form.disabled_family_member" label="Sim" value="true"/>
                                             <x-radio-input wire:model.live="form.disabled_family_member" name="form.disabled_family_member" label="Não" value="false"/>
                                         </x-input-group-inline>
-                                        <x-text-input wire:model="form.family_member_disability_type" name="form.family_member_disability_type" label="Tipo de deficiência" placeholder="Cegueira, cadeirante..." :disabled="$this->form.disabled_family_member !== 'true'"/>
+                                        <x-text-input wire:model="form.family_member_disability_type" name="form.family_member_disability_type" label="Tipo de deficiência" placeholder="Cegueira, cadeirante..." :disabled="$this->form->disabled_family_member !== 'true'"/>
                                         <x-input-group-inline wrapperClass="md:col-span-2" label="Recebe BPC?">
                                             <x-radio-input wire:model="form.receives_bpc" name="form.receives_bpc" label="Sim" value="true"/>
                                             <x-radio-input wire:model="form.receives_bpc" name="form.receives_bpc" label="Não" value="false"/>
@@ -135,13 +135,13 @@
                                             <x-radio-input wire:model.live="form.needs_healthcare" name="form.needs_healthcare" label="Sim" value="true"/>
                                             <x-radio-input wire:model.live="form.needs_healthcare" name="form.needs_healthcare" label="Não" value="false"/>
                                         </x-input-group-inline>
-                                        <x-text-input wire:model="form.who_needs_healthcare" name="form.who_needs_healthcare" label="Quem" placeholder="Nome da pessoa" :disabled="$this->form.needs_healthcare !== 'true'"/>
+                                        <x-text-input wire:model="form.who_needs_healthcare" name="form.who_needs_healthcare" label="Quem" placeholder="Nome da pessoa" :disabled="$this->form->needs_healthcare !== 'true'"/>
                                         <x-input-group-inline label="Alguém toma remédio de uso continuo?">
                                             <x-radio-input wire:model.live="form.uses_continuous_medication" name="form.uses_continuous_medication" label="Sim" value="true"/>
                                             <x-radio-input wire:model.live="form.uses_continuous_medication" name="form.uses_continuous_medication" label="Não" value="false"/>
                                         </x-input-group-inline>
-                                        <x-text-input wire:model="form.who_uses_continuous_medication" name="form.who_uses_continuous_medication" label="Quem" placeholder="Nome da pessoa" :disabled="$this->form.uses_continuous_medication !== 'true'"/>
-                                        <x-text-input wrapperClass="md:col-span-2" wire:model="form.which_continuous_medications" name="form.which_continuous_medications" label="Quais remédios" placeholder="Nome dos remédios ou composto" :disabled="$this->form.uses_continuous_medication !== 'true'"/>
+                                        <x-text-input wire:model="form.who_uses_continuous_medication" name="form.who_uses_continuous_medication" label="Quem" placeholder="Nome da pessoa" :disabled="$this->form->uses_continuous_medication !== 'true'"/>
+                                        <x-text-input wrapperClass="md:col-span-2" wire:model="form.which_continuous_medications" name="form.which_continuous_medications" label="Quais remédios" placeholder="Nome dos remédios ou composto" :disabled="$this->form->uses_continuous_medication !== 'true'"/>
                                         <x-input-group-inline wrapperClass="md:col-span-2" label="Situação do domicílio:">
                                             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
                                                 <x-checkbox-input wire:model="form.housing_status" name="form.housing_status" label="Alagamento" value="Alagamento"/>
@@ -151,7 +151,7 @@
                                                 <x-checkbox-input wire:model="form.housing_status" name="form.housing_status" label="Outros" value="Outros"/>
                                             </div>
                                         </x-input-group-inline>
-                                        <x-text-input wire:model="form.others_housing_status" name="form.others_housing_status" label="Outros" placeholder="Especificar outros" :disabled="!form.housing_status.includes('Outros')"/>
+                                        <x-text-input wire:model="form.others_housing_status" name="form.others_housing_status" label="Outros" placeholder="Especificar outros" :disabled="strpos($this->form->housing_status, 'Outros') !== false"/>
                                     </div>
                                     <div class="mt-12 md:mt-32 grid grid-cols-1 gap-y-5">
                                         <x-checkbox-input wire:model="form.agree_terms_of_use" name="form.agree_terms_of_use" label="Ao salvar as informações, você aceita os Termos de Uso." value="true" :required="true"/>
