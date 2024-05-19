@@ -19,25 +19,48 @@ class PersonRegistrationForm extends Form
     #[Validate('required')]
     public string $mother_name = '';
 
-    #[Validate('required|boolean')]
-    public string $has_cadastro_unico = '';
+    #[Validate('required|date')]
+    public string $birth_date = '';
 
-    #[Validate('required_if:has_cadastro_unico,true')]
+    #[Validate('required')]
+    public string $gender = '';
+
+    #[Validate('required')]
+    public string $occupation = '';
+
+    #[Validate('required')]
+    public string $remuneration = '';
+
+    #[Validate('required|regex:/^\(\d{2}\) \d{1} \d{4}-\d{4}$/')]
+    public string $cell_phone = '';
+
+    #[Validate('required|email|unique:people,email')]
+    public string $email = '';
+
+    #[Validate('required|boolean')]
+    public string $has_unique_registration = '';
+
+    #[Validate('required_if:has_unique_registration,true')]
     public string $nis_number = '';
 
     #[Validate('required|boolean')]
-    public string $has_bolsa_familia = '';
+    public string $bolsa_familia_beneficiary = '';
 
     #[Validate('required|boolean')]
-    public string $covered_by_the_program_volta_por_cima = '';
+    public string $volta_por_cima_beneficiary = '';
 
     #[Validate('required|boolean')]
-    public string $access_to_social_kitchen = '';
-
-    public string $social_kitchen = '';
+    public string $city_beneficiary = '';
 
     #[Validate('required|boolean')]
-    public string $handicapped = '';
+    public string $access_social_kitchen = '';
+
+    public string $which_social_kitchen = '';
+
+    #[Validate('required|boolean')]
+    public string $has_disability = '';
+
+    public string $disability_type = '';
 
     public string $zip_code = '';
 
@@ -58,7 +81,7 @@ class PersonRegistrationForm extends Form
     #[Validate('required')]
     public string $city = '';
 
-    #[Validate('required')]
+    #[Validate('required|boolean')]
     public string $its_at_the_same_address = '';
 
     #[Validate('required_if:its_at_the_same_address,false')]
@@ -87,23 +110,30 @@ class PersonRegistrationForm extends Form
     public array $immediate_needs = [];
 
     #[Validate('required')]
-    public string $family_member_with_deficiency = '';
+public string $disabled_family_member = '';
 
-    #[Validate('required_if:family_member_with_deficiency,true')]
-    public string $family_member_deficiency = '';
+    #[Validate('required_if:disabled_family_member,true')]
+    public string $family_member_disability_type = '';
 
-    public string $receives_BPC = '';
+    #[Validate('required|boolean')]
+    public string $receives_bpc = '';
 
-    public string $anyone_need_health_care = '';
+    #[Validate('required|boolean')]
+    public string $needs_healthcare = '';
 
     public string $who_needs_health_care = '';
 
-    public string $anyone_take_continuous_medication = '';
+    #[Validate('required|boolean')]
+    public string $uses_continuous_medication = '';
 
-    public string $who_takes_continuous_medication = '';
+    public string $who_uses_continuous_medication = '';
 
-    public string $what_medicines_is_this_person_taking = '';
+    public string $which_continuous_medications = '';
 
+    #[Validate('required')]
+    public string $housing_status = '';
+
+    public string $others_housing_status = '';
 
     /**
      * @throws ValidationException
