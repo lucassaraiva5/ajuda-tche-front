@@ -149,31 +149,31 @@
                                         </x-input-group-inline>
 
                                         <x-input-group-inline label="Pessoa com deficiência na família?">
-                                            <x-radio-input name="family_member_with_deficiency" label="Sim" :value="true"/>
-                                            <x-radio-input name="family_member_with_deficiency" label="Não" :value="false"/>
+                                            <x-radio-input wire:model.live="form.family_member_with_deficiency" name="form.family_member_with_deficiency" label="Sim" value="true"/>
+                                            <x-radio-input wire:model.live="form.family_member_with_deficiency" name="form.family_member_with_deficiency" label="Não" value="false"/>
                                         </x-input-group-inline>
 
-                                        <x-text-input name="family_member_deficiency" label="Tipo de deficiência" placeholder="Cegueira, cadeirante..."/>
+                                        <x-text-input wire:model="form.family_member_deficiency" name="form.family_member_deficiency" label="Tipo de deficiência" placeholder="Cegueira, cadeirante..." :disabled="$this->form->family_member_with_deficiency !== 'true'"/>
 
                                         <x-input-group-inline wrapperClass="md:col-span-2" label="Recebe BPC?">
-                                            <x-radio-input name="receives_BPC" label="Sim" :value="true"/>
-                                            <x-radio-input name="receives_BPC" label="Não" :value="false"/>
+                                            <x-radio-input wire:model="form.receives_BPC" name="form.receives_BPC" label="Sim" value="true"/>
+                                            <x-radio-input wire:model="form.receives_BPC" name="form.receives_BPC" label="Não" value="false"/>
                                         </x-input-group-inline>
 
                                         <x-input-group-inline label="Alguém necessita de cuidados de saúde?">
-                                            <x-radio-input name="anyone_need_health_care" label="Sim" :value="true"/>
-                                            <x-radio-input name="anyone_need_health_care" label="Não" :value="false"/>
+                                            <x-radio-input wire:model.live="form.anyone_need_health_care" name="form.anyone_need_health_care" label="Sim" value="true"/>
+                                            <x-radio-input wire:model.live="form.anyone_need_health_care" name="form.anyone_need_health_care" label="Não" value="false"/>
                                         </x-input-group-inline>
 
-                                        <x-text-input name="who_needs_health_care" label="Quem" placeholder="Nome da pessoa"/>
+                                        <x-text-input wire:model="form.who_needs_health_care" name="form.who_needs_health_care" label="Quem" placeholder="Nome da pessoa" :disabled="$this->form->anyone_need_health_care !== 'true'"/>
 
                                         <x-input-group-inline label="Alguém toma remédio de uso continuo?">
-                                            <x-radio-input name="anyone_take_continuous_medication" label="Sim" :value="true"/>
-                                            <x-radio-input name="anyone_take_continuous_medication" label="Não" :value="false"/>
+                                            <x-radio-input wire:model.live="form.anyone_take_continuous_medication" name="form.anyone_take_continuous_medication" label="Sim" value="true"/>
+                                            <x-radio-input wire:model.live="form.anyone_take_continuous_medication" name="form.anyone_take_continuous_medication" label="Não" value="false"/>
                                         </x-input-group-inline>
 
-                                        <x-text-input name="who_takes_continuous_medication" label="Quem" placeholder="Nome da pessoa"/>
-                                        <x-text-input wrapperClass="md:col-span-2" name="what_medicines_is_this_person_taking" label="Quais remédios" placeholder="Nome dos remédios ou composto"/>
+                                        <x-text-input wire.model="form.who_takes_continuous_medication" name="form.who_takes_continuous_medication" label="Quem" placeholder="Nome da pessoa" :disabled="$this->form->anyone_take_continuous_medication !== 'true'"/>
+                                        <x-text-input wrapperClass="md:col-span-2" wire:model="form.what_medicines_is_this_person_taking" name="form.what_medicines_is_this_person_taking" label="Quais remédios" placeholder="Nome dos remédios ou composto" :disabled="$this->form->anyone_take_continuous_medication !== 'true'"/>
 
                                         <x-input-group-inline wrapperClass="md:col-span-2" label="Situação do domicílio:">
                                             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">

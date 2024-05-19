@@ -86,6 +86,25 @@ class PersonRegistrationForm extends Form
 
     public array $immediate_needs = [];
 
+    #[Validate('required')]
+    public string $family_member_with_deficiency = '';
+
+    #[Validate('required_if:family_member_with_deficiency,true')]
+    public string $family_member_deficiency = '';
+
+    public string $receives_BPC = '';
+
+    public string $anyone_need_health_care = '';
+
+    public string $who_needs_health_care = '';
+
+    public string $anyone_take_continuous_medication = '';
+
+    public string $who_takes_continuous_medication = '';
+
+    public string $what_medicines_is_this_person_taking = '';
+
+
     /**
      * @throws ValidationException
      */
