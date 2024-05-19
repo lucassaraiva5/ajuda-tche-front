@@ -56,7 +56,7 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="/cadastro">Cadastre-se ajudatchê</a></li>
+{{--                                <li><a class="dropdown-item" href="/cadastro">Cadastre-se ajudatchê</a></li>--}}
                                 <li><a class="dropdown-item" href="#x" onclick="createAll()">Todos serviços</a></li>
                             </ul>
                         </li>
