@@ -86,15 +86,15 @@
 
         <div class="contagem">
             <div class="t1">
-                <h1>+334</h1>
+                <h1>+445</h1>
                 <p>Municípios atingidos</p>
             </div>
             <div class="t2">
-                <h1>+19.000</h1>
+                <h1>+615.000</h1>
                 <p>Desabrigados</p>
             </div>
             <div class="t3">
-                <h1>+121.000</h1>
+                <h1>+2.000.000</h1>
                 <p>Pessoas impactadas</p>
             </div>
         </div>
