@@ -1,0 +1,621 @@
+s/* reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+
+body {
+    background-color: rgb(255, 255, 255);
+    overflow-y: hidden;
+}
+
+ul {
+    list-style: none;
+}
+
+h3 {
+    /* padding-top: 20px; */
+    /* padding-left: 10px;  */
+    /* font-size: 32px;  */
+    /* padding: 1rem 0; */
+    font-family: system-ui, -apple-system;
+    font-weight: 700;
+    /* padding-bottom: 30px; */
+}
+
+nav img {
+    margin-left: 30px;
+    width: 300px;
+}
+
+.navbar {
+    list-style-type: none;
+    /* display: flex; */
+    justify-content: space-between;
+    background-color: #f8f9fa;
+    /* height: 120px; */
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    position: fixed;
+    /* height: 100px; */
+
+}
+
+.navbar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, #008d2a 10%, #ff2727 40%, #dadd20 100%);
+}
+
+.menu {
+    display: flex;
+    gap: 40%;
+}
+
+.navbar-nav {
+    display: flex;
+    gap: 3rem;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.navbar a:hover {
+    color: #0E5F4F;
+    font-size: 21px;
+}
+
+
+main {
+    padding: 2%;
+}
+
+main>div {
+    margin: 0 auto;
+    margin-top: 90px;
+}
+
+/* Banner - classe destaque */
+
+.destaque-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 370px;
+    padding-top: 40px;
+}
+
+.destaque-texto {
+    flex: 1;
+    /* padding-right: 10px; */
+    /* Distância entre o texto e a imagem */
+    margin-left: 30px;
+    margin-bottom: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.destaque-texto .titulo-destaque {
+    font-size: 60px;
+    color: #0E5F4F;
+}
+
+.destaque-texto .descricao-destaque {
+    font-size: 28px;
+    font-weight: 400;
+    margin-top: 15px;
+    color: #333;
+}
+
+.linha-personalizada {
+    width: 400px;
+    height: 2px;
+    background-color: #8f8f8f;
+    margin-top: 20px;
+}
+
+.destaque-imagem img {
+    max-width: 100%;
+    height: 350px;
+    width: 600px;
+    border-radius: 10px;
+    /* margin-right: 20px; */
+}
+
+/* Classe contagem */
+.contagem {
+    background-color: #0E5F4F;
+    display: flex;
+    justify-content: space-between;
+    height: 150px;
+    /* margin-left: 70px;
+    margin-right: 70px; */
+    border-radius: 7px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.438);
+
+}
+
+.contagem div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.contagem h1 {
+    margin: 0;
+    font-size: 52px;
+    font-weight: bolder;
+    color: white;
+}
+
+.contagem p {
+    margin: 0;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+.t3 p {
+    margin-left: 19px;
+}
+
+.t2 p {
+    margin-left: 10px;
+}
+
+/* Texto Informativo */
+.informacao {
+    height: 150px;
+    margin-left: 130px;
+    margin-right: 130px;
+    margin-bottom: 100px;
+}
+
+.informacao h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.informacao p {
+    text-align: center;
+    font-size: 20px;
+}
+
+/* Estilo dos cartões */
+
+.containerCards {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 90px;
+}
+
+
+.containerCards h3 {
+    margin-top: 60px;
+    font-size: 24px;
+}
+
+.box {
+    background-color: #f1f1f1;
+    padding: 1rem;
+    margin: 10px;
+    /* max-width: 500px; */
+    width: 380px;
+    height: 250px;
+    border-radius: 10px;
+    position: relative;
+    border: 1px solid rgb(179, 179, 179);
+    flex-direction: column;
+    transition: 0.3s;
+    box-shadow: 0 0 5px rgba(10, 10, 10, 0.3);
+}
+.box:hover{
+    box-shadow: 0 0 10px rgba(10, 10, 10, 1);
+}
+.box a{
+    transition: 0.3s;
+}
+.box a:hover{
+    color: #0E5F4F;
+}
+.box p {
+    overflow-y: auto;
+    height: 80px;
+}
+
+/* Ocultar a barra de rolagem */
+.box p::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+.box-verde .square {
+    background-color: #008d2a;
+    /* Cor verde */
+    opacity: 0.5;
+}
+
+.box-verde-2 .square {
+    background-color: #0E5F4F;
+    /* Cor vermelha */
+    opacity: 0.5;
+}
+
+.box-red-2 .square {
+    background-color: #FF2D20;
+    /* Cor vermelha */
+    opacity: 0.5;
+}
+
+.box-amarelo .square {
+    background-color: #FFC520;
+    /* Cor amarela */
+    opacity: 0.5;
+}
+
+.box-azul .square {
+    background-color: #006DFF;
+    /* Cor amarela */
+    opacity: 0.5;
+}
+
+.box-cinza .square {
+    background-color: #8ab0a4;
+    /* Cor amarela */
+    opacity: 0.5;
+}
+
+.ver-mais {
+    position: absolute;
+    right: 0px;
+    border: none;
+    padding: 5px 20px;
+    background-color: transparent;
+    color: #272727;
+    font-weight: bold;
+}
+
+.square {
+    width: 50px;
+    height: 50px;
+    border-radius: 7px;
+    position: absolute;
+    left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.square img{
+    width: 70%;
+    border-radius: 2px;
+}
+
+.divisao {
+    border-top: 2px dotted #0E5F4F;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 30px;
+}
+
+.voluntarios a {
+    display: inline-block;
+    width: 45%;
+    text-decoration: none;
+}
+.voluntarios i {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.voluntarios h4 {
+    border: 1px solid #0E5F4F;
+    padding: 5px 20px;
+    display: inline-block;
+    border-radius: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 18px;
+    color: #0E5F4F;
+}
+
+.voluntarios h1 {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.voluntarios a {
+    color: #272727;
+}
+
+.voluntarios .fab {
+    color: #0128d6;
+}
+
+
+/* Footer */
+
+footer {
+    padding: 20px;
+    background-color: #0E5F4F;
+    color: #ffffff;
+    margin-right: 90px;
+    /* height: 230px; */
+
+}
+
+.footer-column {
+    /* flex: 1; */
+    /* margin-right: 20px; */
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* .footer-column:last-child {
+    margin-right: 0;
+} */
+
+.footer a {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 10px;
+}
+.footer-column img {
+    margin-top: 5px;
+    padding-right: 30px;
+    margin-bottom: 25px;
+    width: 400px;
+}
+
+.logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    color: #333333;
+    height: 150px;
+    padding: 2rem 3rem;
+    margin-bottom: 30px;
+    margin-left: 60px;
+    margin-right: 80px;
+}
+
+.logo img {
+    /* margin-right: 10px; */
+    /* Espaçamento entre o logo e as redes sociais */
+    height: 100px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: end;
+    gap: 2rem;
+}
+
+.social-icons a {
+    /* margin-left: 50px; */
+    /* Espaçamento entre os ícones das redes sociais */
+    color: #333333;
+    /* Cor dos ícones */
+    font-size: 20px;
+    transition: 0.3s;
+
+}
+.social-icons a:hover {
+    /* margin-left: 50px; */
+    /* Espaçamento entre os ícones das redes sociais */
+    color: #0E5F4F;
+    /* Cor dos ícones */
+    font-size: 24px;
+}
+.square i {
+    font-size: 20px;
+    color: green;
+    background-color: #272727;
+    width: 100%;
+}
+
+/* Breakpoint para dispositivos grandes */
+@media screen and (max-width: 998px) {
+    .menu {
+        gap: 10%;
+    }
+}
+
+/* Breakpoint para dispositivos médios */
+/* Breakpoint para dispositivos médios */
+@media screen and (max-width: 768px) {
+
+    .navbar-nav {
+        gap: 0;
+    }
+
+    header img {
+        width: 180px;
+        margin-left: 0px;
+
+    }
+
+    nav{
+        height: auto;
+    }
+
+    .destaque-container {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 40px;
+    }
+
+    .destaque-texto {
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .destaque-texto h2{
+        font-weight: 700;
+        padding-left: 10px;
+        padding-right: 10px;
+
+    }
+
+    .linha-personalizada{
+        background-color: #ffffff;
+    }
+
+    .destaque-imagem img {
+        /* width: auto; */
+        width: 100%;
+        height: 250px;
+        border-bottom-left-radius: 14px;
+        border-bottom-right-radius: 14px;
+        border-top-left-radius: 0%;
+        border-top-right-radius: 0%;
+
+    }
+
+    .destaque-texto .titulo-destaque {
+        font-size: 36px;
+        width: 90%;
+    }
+    .destaque-texto .descricao-destaque{
+        width: 90%;
+        font-size: 18px;
+        font-weight: 500;
+        margin-top: 20px;
+
+    }
+
+    .informacao {
+        margin: 3%;
+    }
+
+    .informacao p{
+        text-align: left;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    main>div {
+        margin: 0 auto;
+        margin-top: 50px;
+    }
+
+
+    .contagem {
+        height: 100px;
+        flex-direction:row;
+        gap: 1rem;
+        width: 100%;
+
+    }
+
+    .contagem h1 {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .contagem p {
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .contagem .t1{
+        margin-left: 18px;
+    }
+
+    .contagem .t2{
+        margin-bottom: 18px;
+        margin-right: 10px;
+    }
+
+    .contagem .t3{
+        margin-right: 25px;
+    }
+
+
+    .logo{
+        height: 250px;
+    }
+
+    .logo img{
+        height: 100px;
+        margin-bottom: 280px;
+    }
+    .footer img {
+        margin-top: 25px;
+        width: 90%;
+        margin-left: 30px;
+    }
+
+    .social-icons{
+        margin-bottom: 280px;
+        margin-left: 100px;
+    }
+
+    /* .dropdown-menu{
+        width: 200px;
+    } */
+
+}
+
+
+
+
+/* Breakpoint para dispositivos pequenos */
+@media screen and (max-width: 548px) {
+    body {
+        font-size: 80%;
+    }
+    .box {
+        width: 100%;
+    }
+    .contagem{
+        margin-top: 120px;
+    }
+    .containerCards {
+        margin-top: 180px;
+    }
+
+    footer {
+        margin-top: 100px;
+        flex-direction: column;
+        align-items: center;
+    }
+    .social-icons{
+        gap: 1rem;
+        justify-content: center;
+    }
+    .logo img{
+        height: 50px;
+    }
+}
+
+
+/* Breakpoint para ajuste do footer abaixo de 470px */
+/* @media screen and (max-width: 470px) {
+    footer {
+        margin-top: 250px;
+        flex-direction: column;
+        align-items: center;
+    }
+} */
