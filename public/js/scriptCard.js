@@ -28,23 +28,23 @@ function createCards(data) {
                 card.classList.add('box-verde-2');
                 icon = 'seguro'
                 break;
-            case 'ajudatche':
-                card.classList.add('box-red-2');
-                icon = 'ajudatche-logo'
-                break;
+            // case 'ajudatche':
+            //     card.classList.add('box-red-2');
+            //     icon = 'ajudatche-logo'
+            //     break;
         }
 
-        if (item.tipo.toLowerCase() === 'ajudatche') {
-            card.innerHTML += `
-                <div class="square">
-                <img src="./imagens/${icon}.svg">
-                </div>
-
-                <h3>${item.titulo}</h3>
-                <p>${item.descricao}</p>
-                <a class="ver-mais" target="_blank" href="/cadastro">Saiba mais</a>
-            `;
-        } else {
+        // if (item.tipo.toLowerCase() === 'ajudatche') {
+        //     card.innerHTML += `
+        //         <div class="square">
+        //         <img src="./imagens/${icon}.svg">
+        //         </div>
+        //
+        //         <h3>${item.titulo}</h3>
+        //         <p>${item.descricao}</p>
+        //         <a class="ver-mais" target="_blank" href="/cadastro">Saiba mais</a>
+        //     `;
+        // } else {
             card.innerHTML += `
                 <div class="square">
                 <img src="./imagens/${icon}.png">
@@ -54,7 +54,7 @@ function createCards(data) {
                 <p>${item.descricao}</p>
                 <a class="ver-mais" target="_blank" href="${item.link}">Saiba mais</a>
             `;
-        }
+        // }
 
         allCards.push(card);
         cardsContainer.appendChild(card);
@@ -95,24 +95,24 @@ function createCardsType(tipo) {
                             card.classList.add('box-verde-2');
                             icon = 'seguro'
                             break;
-                        case 'ajudatche':
-                            card.classList.add('box-red-2');
-                            icon = 'ajudatche-logo'
-                            break;
+                        // case 'ajudatche':
+                        //     card.classList.add('box-red-2');
+                        //     icon = 'ajudatche-logo'
+                        //     break;
                     }
 
                     console.log(item.tipo.toLowerCase())
-                    if (item.tipo.toLowerCase() === 'ajudatche') {
-                        card.innerHTML += `
-                        <div class="square">
-                        <img src="./imagens/${icon}.svg">
-                        </div>
-
-                        <h3>${item.titulo}</h3>
-                        <p>${item.descricao}</p>
-                        <a class="ver-mais" target="_blank" href="/cadastro">Saiba mais </a>
-                    `;
-                    } else {
+                    // if (item.tipo.toLowerCase() === 'ajudatche') {
+                    //     card.innerHTML += `
+                    //     <div class="square">
+                    //     <img src="./imagens/${icon}.svg">
+                    //     </div>
+                    //
+                    //     <h3>${item.titulo}</h3>
+                    //     <p>${item.descricao}</p>
+                    //     <a class="ver-mais" target="_blank" href="/cadastro">Saiba mais </a>
+                    // `;
+                    // } else {
                         card.innerHTML += `
                         <div class="square">
                         <img src="./imagens/${icon}.png">
@@ -122,7 +122,7 @@ function createCardsType(tipo) {
                         <p>${item.descricao}</p>
                         <a class="ver-mais" target="_blank" href="${item.link}">Saiba mais </a>
                     `;
-                    }
+                    // }
 
                     cardsContainer.appendChild(card);
                 }
@@ -131,12 +131,12 @@ function createCardsType(tipo) {
 }
 
 const json = [
-    {
-        "titulo": "Cadastre-se ajudatchê",
-        "descricao": "Cadastre-se para auxílio e mapeamento de benefícios socias",
-        "link": "",
-        "tipo": "ajudatche"
-    },
+    // {
+    //     "titulo": "Cadastre-se ajudatchê",
+    //     "descricao": "Cadastre-se para auxílio e mapeamento de benefícios socias",
+    //     "link": "",
+    //     "tipo": "ajudatche"
+    // },
     {
         "titulo": "Carteira de Identidade",
         "descricao": "Emitir segunda via da Carteira de identidade",
