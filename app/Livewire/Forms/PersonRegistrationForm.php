@@ -39,6 +39,41 @@ class PersonRegistrationForm extends Form
     #[Validate('required|boolean')]
     public string $handicapped = '';
 
+    public string $zip_code = '';
+
+    #[Validate('required')]
+    public string $street = '';
+
+    #[Validate('required')]
+    public string $number = '';
+
+    public string $complement = '';
+
+    #[Validate('required')]
+    public string $neighborhood = '';
+
+    #[Validate('required')]
+    public string $state = '';
+
+    #[Validate('required')]
+    public string $city = '';
+
+    public string $shelter_state = '';
+
+    public string $shelter_city = '';
+
+    public string $shelter_location = '';
+
+    public string $shelter_info = '';
+
+    public string $shelter_street = '';
+
+    public string $shelter_number = '';
+
+    public string $shelter_complement = '';
+
+    public string $shelter_neighborhood = '';
+
     /**
      * @throws ValidationException
      */

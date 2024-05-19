@@ -82,18 +82,18 @@
                                     </div>
 
                                     <div class="grid w-full grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
-                                        <x-text-input wrapperClass="md:col-span-2" name="cep" label="CEP" placeholder="00000-000" x-mask="99999-999"/>
+                                        <x-text-input wrapperClass="md:col-span-2" wire:model="form.cep" name="form.cep" label="CEP" placeholder="00000-000" x-mask="99999-999"/>
 
                                         <div class="grid grid-cols-1 md:grid-cols-4 gap-x-5 gap-y-6 md:col-span-2">
-                                            <x-text-input wrapperClass="md:col-span-3" name="address" label="Logradouro" placeholder="Rua, Avenida, etc..." :required="true"/>
-                                            <x-text-input name="number" label="Número" placeholder="Número" :required="true"/>
+                                            <x-text-input wrapperClass="md:col-span-3" wire:model="form.street" name="form.street" label="Logradouro" placeholder="Rua, Avenida, etc..." :required="true"/>
+                                            <x-text-input wire:model="form.number" name="form.number" label="Número" placeholder="Número" :required="true"/>
                                         </div>
 
-                                        <x-text-input name="complement" label="Complemento" placeholder="Complemento"/>
-                                        <x-text-input name="neighborhood" label="Bairro" placeholder="Bairro" :required="true"/>
+                                        <x-text-input wire:model="form.complement" name="form.complement" label="Complemento" placeholder="Complemento"/>
+                                        <x-text-input wire:model="form.neighborhood" name="form.neighborhood" label="Bairro" placeholder="Bairro" :required="true"/>
 
-                                        <x-select-input name="uf" label="Estado" placeholder="Selecione o estado" :required="true" :options="$states"/>
-                                        <x-text-input name="city" label="Cidade" placeholder="Selecione uma cidade" :required="true"/>
+                                        <x-select-input wire:model="form.state" name="form.state" label="Estado" placeholder="Selecione o estado" :required="true" :options="$states"/>
+                                        <x-text-input wire:model="form.city" name="form.city" label="Cidade" placeholder="Selecione uma cidade" :required="true"/>
 
                                         <x-input-group-inline wrapperClass="md:col-span-2 min-h-[60px]" label="Você está atualmente neste mesmo endereço?">
                                             <x-radio-input name="its_at_the_same_address" label="Sim" :value="true"/>
@@ -106,19 +106,19 @@
                                     <p class="font-semibold text-gray-700 text-uppercase mb-7">LOCALIZAÇÃO ATUAL</p>
 
                                     <div class="grid w-full grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
-                                        <x-select-input name="current_uf" label="Estado" placeholder="Selecione o estado" :required="true" :options="$states"/>
-                                        <x-text-input name="current_city" label="Cidade" placeholder="Selecione uma cidade" :required="true"/>
+                                        <x-select-input wire:model="form.shelter_state" name="form.shelter_state" label="Estado" placeholder="Selecione o estado" :required="true" :options="$states"/>
+                                        <x-text-input wire:model="form.shelter_city" name="form.shelter_city" label="Cidade" placeholder="Selecione uma cidade" :required="true"/>
 
-                                        <x-text-input name="help_place" label="Local que está abrigado(a)" placeholder="Selecione um local" :required="true"/>
-                                        <x-text-input name="help_local" label="Informe o local" placeholder="Ex: Ulbra Canoas" :required="true"/>
+                                        <x-text-input wire:model="form.shelter_location" name="form.shelter_location" label="Local que está abrigado(a)" placeholder="Selecione um local" :required="true"/>
+                                        <x-text-input wire:model="form.shelter_info" name="form.shelter_info" label="Informe o local" placeholder="Ex: Ulbra Canoas" :required="true"/>
 
                                         <div class="grid md:grid-cols-4 gap-x-5 gap-y-6 md:col-span-2">
-                                            <x-text-input wrapperClass="md:col-span-3" name="current_address" label="Logradouro" placeholder="Rua, Avenida, etc..." :required="true"/>
-                                            <x-text-input name="current_number" label="Número" placeholder="Número" :required="true"/>
+                                            <x-text-input wrapperClass="md:col-span-3" wire:model="form.shelter_street" name="form.shelter_street" label="Logradouro" placeholder="Rua, Avenida, etc..." :required="true"/>
+                                            <x-text-input wire:model="form.shelter_number" name="form.shelter_number" label="Número" placeholder="Número" :required="true"/>
                                         </div>
 
-                                        <x-text-input name="current_complement" label="Complemento" placeholder="Complemento"/>
-                                        <x-text-input name="current_neighborhood" label="Bairro" placeholder="Bairro" :required="true"/>
+                                        <x-text-input wire:model="form.shelter_complement" name="form.shelter_complement" label="Complemento" placeholder="Complemento"/>
+                                        <x-text-input wire:model="form.shelter_neighborhood" name="form.shelter_neighborhood" label="Bairro" placeholder="Bairro" :required="true"/>
                                     </div>
                                 </div>
 
