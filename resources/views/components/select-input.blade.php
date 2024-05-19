@@ -23,7 +23,7 @@
                     'type' => $type,
                     'name' => $name,
                     'id' => $name,
-                    'class' => 'block w-full px-3 py-2.5 text-black placeholder-gray-500/2 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600'
+                    'class' => 'block w-full px-3 py-2.5 text-black placeholder-gray-500/2 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600' . ($errors->has($name) ? ' border-red-600' : '')
                 ]) }}
                 @required($required)>
             @if ($required && str($placeholder)->isNotEmpty())
@@ -35,4 +35,8 @@
             @endforeach
         </select>
     </div>
+
+    @error($name)
+        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+    @enderror
 </div>

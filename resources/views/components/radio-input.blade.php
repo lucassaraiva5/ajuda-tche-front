@@ -11,6 +11,10 @@
     ]) }}>
 
     <label for="{{ $id }}" class="ms-2 font-medium text-gray-900 dark:text-gray-300">
-        {{ $label }}
+        <span>{{ $label }}</span>
+
+        @error($name)
+            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+        @enderror
     </label>
 </div>

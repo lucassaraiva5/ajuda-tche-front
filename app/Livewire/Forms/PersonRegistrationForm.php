@@ -37,27 +37,27 @@ class PersonRegistrationForm extends Form
     #[Validate('required|email|unique:people,email')]
     public string $email = '';
 
-    #[Validate('required|boolean')]
+    #[Validate('required|in:true,false')]
     public string $has_unique_registration = '';
 
     #[Validate('required_if:has_unique_registration,true')]
     public string $nis_number = '';
 
-    #[Validate('required|boolean')]
+    #[Validate('required|in:true,false')]
     public string $bolsa_familia_beneficiary = '';
 
-    #[Validate('required|boolean')]
+    #[Validate('required|in:true,false')]
     public string $volta_por_cima_beneficiary = '';
 
-    #[Validate('required|boolean')]
+    #[Validate('required|in:true,false')]
     public string $city_beneficiary = '';
 
-    #[Validate('required|boolean')]
+    #[Validate('required|in:true,false')]
     public string $access_social_kitchen = '';
 
     public string $which_social_kitchen = '';
 
-    #[Validate('required|boolean')]
+    #[Validate('required|in:true,false')]
     public string $has_disability = '';
 
     public string $disability_type = '';
@@ -81,7 +81,7 @@ class PersonRegistrationForm extends Form
     #[Validate('required')]
     public string $city = '';
 
-    #[Validate('required|boolean')]
+    #[Validate('required|in:true,false')]
     public string $its_at_the_same_address = '';
 
     #[Validate('required_if:its_at_the_same_address,false')]
@@ -115,15 +115,15 @@ public string $disabled_family_member = '';
     #[Validate('required_if:disabled_family_member,true')]
     public string $family_member_disability_type = '';
 
-    #[Validate('required|boolean')]
+    #[Validate('required|in:true,false')]
     public string $receives_bpc = '';
 
-    #[Validate('required|boolean')]
+    #[Validate('required|in:true,false')]
     public string $needs_healthcare = '';
 
     public string $who_needs_health_care = '';
 
-    #[Validate('required|boolean')]
+    #[Validate('required|in:true,false')]
     public string $uses_continuous_medication = '';
 
     public string $who_uses_continuous_medication = '';

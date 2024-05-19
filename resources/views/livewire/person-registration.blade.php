@@ -17,21 +17,21 @@
                                     <x-text-input wire:model="form.cpf" wrapperClass="md:col-span-2" name="form.cpf" label="CPF" placeholder="CPF" x-mask="999.999.999-99" :required="true"/>
                                     <x-text-input wire:model="form.civil_name" wrapperClass="md:col-span-2" name="form.civil_name" label="Nome civil" placeholder="Nome" :required="true"/>
                                     <x-text-input wire:model="form.social_name" wrapperClass="md:col-span-2" name="form.social_name" label="Nome social" placeholder="Nome"/>
-                                    <x-text-input wire:model="form.mother_name" wrapperClass="md:col-span-2" name="form.mother_name" label="Nome da mãe" placeholder="Nome da mãe"/>
+                                    <x-text-input wire:model="form.mother_name" wrapperClass="md:col-span-2" name="form.mother_name" label="Nome da mãe" placeholder="Nome da mãe" :required="true"/>
                                     <x-text-input wire:model="form.birth_date" name="form.birth_date" label="Data de nascimento" placeholder="DD/MM/AAAA" x-mask="99/99/9999" :required="true"/>
                                     <x-select-input wire:model="form.gender" name="form.gender" label="Gênero" placeholder="Selecione um gênero" :required="true" :options="$genders"/>
                                     <x-text-input wire:model="form.occupation" name="form.occupation" label="Ocupação" placeholder="Atividade profissional que desempenha" :required="true"/>
                                     <x-text-input wire:model="form.remuneration" name="form.remuneration" label="Renda" placeholder="Remuneração mensal que recebe" :required="true"/>
-                                    <x-text-input wire:model="form.cell_phone" name="form.cell_phone" label="Celular" placeholder="(xx) x xxxx-xxxx" x-mask="(99) 9 9999-9999"/>
-                                    <x-text-input wire:model="form.email" type="email" name="form.email" label="E-mail" placeholder="exemplo@email.com"/>
+                                    <x-text-input wire:model="form.cell_phone" name="form.cell_phone" label="Celular" placeholder="(xx) x xxxx-xxxx" x-mask="(99) 9 9999-9999" :required="true"/>
+                                    <x-text-input wire:model="form.email" type="email" name="form.email" label="E-mail" placeholder="exemplo@email.com" :required="true"/>
                                     <x-input-group-inline label="Possui Cadastro Único">
                                         <x-radio-input wire:model.live="form.has_unique_registration" name="form.has_unique_registration" label="Sim" value="true"/>
                                         <x-radio-input wire:model.live="form.has_unique_registration" name="form.has_unique_registration" label="Não" value="false"/>
                                     </x-input-group-inline>
-                                    <x-text-input wire:model="form.nis_number" name="form.nis_number" label="Número NIS" placeholder="Número" :disabled="$this->form->has_unique_registration !== 'true'"/>
+                                    <x-text-input wire:model="form.nis_number" name="form.nis_number" label="Número NIS" placeholder="Número" :required="$this->form->has_unique_registration == 'true'" :disabled="$this->form->has_unique_registration != 'true'"/>
                                     <x-input-group-inline wrapperClass="md:col-span-2 min-h-[50px]" label="Beneficiário do Bolsa Família?">
-                                        <x-radio-input wire:model="form.bolsa_familia_beneficiary" name="form.bolsa_familia_beneficiary" label="Sim" value="true"/>
-                                        <x-radio-input wire:model="form.bolsa_familia_beneficiary" name="form.bolsa_familia_beneficiary" label="Não" value="false"/>
+                                        <x-radio-input wire:model="form.bolsa_familia_beneficiary" name="form.bolsa_familia_beneficiary" label="Sim" value="true" :required="true"/>
+                                        <x-radio-input wire:model="form.bolsa_familia_beneficiary" name="form.bolsa_familia_beneficiary" label="Não" value="false" :required="true"/>
                                     </x-input-group-inline>
                                     <x-input-group-inline wrapperClass="md:col-span-2 min-h-[50px]" label="Já foi contemplado com o Programa Volta por Cima?">
                                         <x-radio-input wire:model="form.volta_por_cima_beneficiary" name="form.volta_por_cima_beneficiary" label="Sim" value="true"/>
@@ -87,16 +87,16 @@
                                 <div id="shelter_localization" class="mt-16 hidden">
                                     <p class="font-semibold text-gray-700 text-uppercase mb-7">LOCALIZAÇÃO ATUAL</p>
                                     <div class="grid w-full grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
-                                        <x-select-input wire:model="form.shelter_state" name="form.shelter_state" label="Estado" placeholder="Selecione o estado" :required="true" :options="$states"/>
-                                        <x-text-input wire:model="form.shelter_city" name="form.shelter_city" label="Cidade" placeholder="Selecione uma cidade" :required="true"/>
-                                        <x-text-input wire:model="form.shelter_location" name="form.shelter_location" label="Local que está abrigado(a)" placeholder="Selecione um local" :required="true"/>
-                                        <x-text-input wire:model="form.shelter_info" name="form.shelter_info" label="Informe o local" placeholder="Ex: Ulbra Canoas" :required="true"/>
+                                        <x-select-input wire:model="form.shelter_state" name="form.shelter_state" label="Estado" placeholder="Selecione o estado"  :options="$states"/>
+                                        <x-text-input wire:model="form.shelter_city" name="form.shelter_city" label="Cidade" placeholder="Selecione uma cidade" />
+                                        <x-text-input wire:model="form.shelter_location" name="form.shelter_location" label="Local que está abrigado(a)" placeholder="Selecione um local" />
+                                        <x-text-input wire:model="form.shelter_info" name="form.shelter_info" label="Informe o local" placeholder="Ex: Ulbra Canoas" />
                                         <div class="grid md:grid-cols-4 gap-x-5 gap-y-6 md:col-span-2">
-                                            <x-text-input wrapperClass="md:col-span-3" wire:model="form.shelter_street" name="form.shelter_street" label="Logradouro" placeholder="Rua, Avenida, etc..." :required="true"/>
-                                            <x-text-input wire:model="form.shelter_number" name="form.shelter_number" label="Número" placeholder="Número" :required="true"/>
+                                            <x-text-input wrapperClass="md:col-span-3" wire:model="form.shelter_street" name="form.shelter_street" label="Logradouro" placeholder="Rua, Avenida, etc..." />
+                                            <x-text-input wire:model="form.shelter_number" name="form.shelter_number" label="Número" placeholder="Número" />
                                         </div>
                                         <x-text-input wire:model="form.shelter_complement" name="form.shelter_complement" label="Complemento" placeholder="Complemento"/>
-                                        <x-text-input wire:model="form.shelter_neighborhood" name="form.shelter_neighborhood" label="Bairro" placeholder="Bairro" :required="true"/>
+                                        <x-text-input wire:model="form.shelter_neighborhood" name="form.shelter_neighborhood" label="Bairro" placeholder="Bairro" />
                                     </div>
                                 </div>
                                 <div class="mt-16">
