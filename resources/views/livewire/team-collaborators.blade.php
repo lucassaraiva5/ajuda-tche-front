@@ -1,0 +1,10 @@
+<div>
+    <x-header-team/>
+    <x-collaborators/>
+    <x-collaborators/>
+    <x-collaborators/>
+    <x-collaborators/>
+    <x-collaborators/>
+    <x-together-lp/>
+    <x-footer-lp/>
+</div>
