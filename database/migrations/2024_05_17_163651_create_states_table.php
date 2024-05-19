@@ -17,7 +17,7 @@ return new class extends Migration
             $table->softDeletes();
 
             $table->string('name');
-            $table->string('uf')->index();
+            $table->string('uf')->index()->unique();
         });
     }
 
