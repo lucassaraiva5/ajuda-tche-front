@@ -38,5 +38,8 @@
 @endif
 
 @livewireScripts
+
+@stack('js')
+
 </body>
 </html>

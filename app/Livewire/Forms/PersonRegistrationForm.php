@@ -58,21 +58,33 @@ class PersonRegistrationForm extends Form
     #[Validate('required')]
     public string $city = '';
 
+    #[Validate('required')]
+    public string $its_at_the_same_address = '';
+
+    #[Validate('required_if:its_at_the_same_address,false')]
     public string $shelter_state = '';
 
+    #[Validate('required_if:its_at_the_same_address,false')]
     public string $shelter_city = '';
 
+    #[Validate('required_if:its_at_the_same_address,false')]
     public string $shelter_location = '';
 
+    #[Validate('required_if:its_at_the_same_address,false')]
     public string $shelter_info = '';
 
+    #[Validate('required_if:its_at_the_same_address,false')]
     public string $shelter_street = '';
 
+    #[Validate('required_if:its_at_the_same_address,false')]
     public string $shelter_number = '';
 
     public string $shelter_complement = '';
 
+    #[Validate('required_if:its_at_the_same_address,false')]
     public string $shelter_neighborhood = '';
+
+    public array $immediate_needs = [];
 
     /**
      * @throws ValidationException

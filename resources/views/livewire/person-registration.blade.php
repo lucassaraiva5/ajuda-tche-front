@@ -96,13 +96,13 @@
                                         <x-text-input wire:model="form.city" name="form.city" label="Cidade" placeholder="Selecione uma cidade" :required="true"/>
 
                                         <x-input-group-inline wrapperClass="md:col-span-2 min-h-[60px]" label="Você está atualmente neste mesmo endereço?">
-                                            <x-radio-input name="its_at_the_same_address" label="Sim" :value="true"/>
-                                            <x-radio-input name="its_at_the_same_address" label="Não" :value="false"/>
+                                            <x-radio-input wire:model="form.its_at_the_same_address" name="form.its_at_the_same_address" label="Sim" value="true"/>
+                                            <x-radio-input wire:model="form.its_at_the_same_address" name="form.its_at_the_same_address" label="Não" value="false"/>
                                         </x-input-group-inline>
                                     </div>
                                 </div>
 
-                                <div class="mt-16">
+                                <div id="shelter_localization" class="mt-16 hidden">
                                     <p class="font-semibold text-gray-700 text-uppercase mb-7">LOCALIZAÇÃO ATUAL</p>
 
                                     <div class="grid w-full grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
@@ -130,6 +130,22 @@
                                             <x-radio-input name="situation" label="Desabrigado" :value="'desabrigado'"/>
                                             <x-radio-input name="situation" label="Desalojado" :value="'desalojado'"/>
                                             <x-radio-input name="situation" label="Atingido" :value="'atingido'"/>
+                                        </x-input-group-inline>
+
+                                        <x-input-group-inline wrapperClass="md:col-span-2 min-h-[40px]" label="Necessidades imediatas:">
+                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
+                                                <x-checkbox-input wire:model="form.immediate_needs" name="form.immediate_needs" label="Roupas" :value="'Roupas'"/>
+                                                <x-checkbox-input wire:model="form.immediate_needs" name="form.immediate_needs" label="Alimentos" :value="'Alimentos'"/>
+                                                <x-checkbox-input wire:model="form.immediate_needs" name="form.immediate_needs" label="Alojamento" :value="'Alojamento'"/>
+                                                <x-checkbox-input wire:model="form.immediate_needs" name="form.immediate_needs" label="Medicamentos" :value="'Medicamentos'"/>
+                                                <x-checkbox-input wire:model="form.immediate_needs" name="form.immediate_needs" label="Água" :value="'Água'"/>
+                                                <x-checkbox-input wire:model="form.immediate_needs" name="form.immediate_needs" label="Material de higiene pessoal" :value="'Material de higiene pessoal'"/>
+                                                <x-checkbox-input wire:model="form.immediate_needs" name="form.immediate_needs" label="Documentos" :value="'Documentos'"/>
+                                                <x-checkbox-input wire:model="form.immediate_needs" name="form.immediate_needs" label="Material de limpeza" :value="'Material de limpeza'"/>
+                                                <x-checkbox-input wire:model="form.immediate_needs" name="form.immediate_needs" label="Atendimento psicossocial" :value="'Atendimento psicossocial'"/>
+                                                <x-checkbox-input wire:model="form.immediate_needs" name="form.immediate_needs" label="Fraldas (Infantis/Geriátricas)" :value="'Fraldas (Infantis/Geriátricas)'"/>
+                                                <x-checkbox-input wire:model="form.immediate_needs" name="form.immediate_needs" label="Outros" :value="'Outros'"/>
+                                            </div>
                                         </x-input-group-inline>
 
                                         <x-input-group-inline label="Pessoa com deficiência na família?">
@@ -194,4 +210,19 @@
         </div>
     </section>
 
+    @push('js')
+        <script>
+            document.querySelectorAll('[name="form.its_at_the_same_address"]').forEach((el) => {
+                el.addEventListener('change', function (event) {
+                    const localization = document.getElementById('shelter_localization');
+
+                    if (event.target.value === 'false') {
+                        localization.classList.remove('hidden');
+                    } else {
+                        localization.classList.add('hidden');
+                    }
+                })
+            });
+        </script>
+    @endpush
 </div>
