@@ -1,6 +1,6 @@
-@props(['name', 'label', 'value'])
+@props(['name', 'label', 'value', 'wrapperClass' => ''])
 
-<div class="flex items-center">
+<div class="flex items-center {{ $wrapperClass }}">
     <input
         {{ $attributes->merge([
         'type' => 'checkbox',
@@ -10,7 +10,7 @@
         'value' => $value
     ]) }}>
 
-    <label for="{{ $name }}" class="ms-2 font-medium text-gray-900 dark:text-gray-300">
+    <label for="{{ $name }}" class="ms-3 font-medium text-gray-900 dark:text-gray-300">
         {{ $label }}
     </label>
 </div>
