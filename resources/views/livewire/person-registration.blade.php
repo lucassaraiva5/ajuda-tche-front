@@ -15,10 +15,10 @@
                                 <p class="font-semibold text-gray-700 text-uppercase mb-7">INFORMAÇÕES PESSOAIS</p>
 
                                 <div class="grid w-full grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
-                                    <x-text-input wrapperClass="" name="cpf" label="CPF" placeholder="CPF" x-mask="999.999.999-99" :required="true"/>
-                                    <x-text-input wrapperClass="" name="civil_name" label="Nome civil" placeholder="Nome" :required="true"/>
-                                    <x-text-input wrapperClass="" name="social_name" label="Nome social" placeholder="Nome"/>
-                                    <x-text-input wrapperClass="" name="mother_name" label="Nome da mãe" placeholder="Nome da mãe"/>
+                                    <x-text-input wire:model="form.cpf" wrapperClass="md:col-span-2" name="form.cpf" label="CPF" placeholder="CPF" x-mask="999.999.999-99" :required="true"/>
+                                    <x-text-input wire:model="form.civil_name" wrapperClass="md:col-span-2" name="form.civil_name" label="Nome civil" placeholder="Nome" :required="true"/>
+                                    <x-text-input wire:model="form.social_name" wrapperClass="md:col-span-2" name="form.social_name" label="Nome social" placeholder="Nome"/>
+                                    <x-text-input wire:model="form.mother_name" wrapperClass="md:col-span-2" name="form.mother_name" label="Nome da mãe" placeholder="Nome da mãe"/>
 
                                     <x-text-input name="date_of_birth" label="Data de nascimento" placeholder="DD/MM/AAAA" x-mask="99/99/9999" :required="true"/>
                                     <x-select-input name="gender" label="Gênero" placeholder="Selecione um gênero" :required="true" :options="$genders"/>
@@ -30,35 +30,35 @@
                                     <x-text-input type="email" name="email" label="E-mail" placeholder="exemplo@email.com"/>
 
                                     <x-input-group-inline label="Possui Cadastro Único">
-                                        <x-radio-input name="has_cadastro_unico" label="Sim" :value="true"/>
-                                        <x-radio-input name="has_cadastro_unico" label="Não" :value="false"/>
+                                        <x-radio-input wire:model.live="form.has_cadastro_unico" name="form.has_cadastro_unico" label="Sim" value="true"/>
+                                        <x-radio-input wire:model.live="form.has_cadastro_unico" name="form.has_cadastro_unico" label="Não" value="false"/>
                                     </x-input-group-inline>
 
-                                    <x-text-input name="nis_number" label="Número NIS" placeholder="Número"/>
+                                    <x-text-input wire:model="form.nis_number" name="form.nis_number" label="Número NIS" placeholder="Número" :disabled="$this->form->has_cadastro_unico !== 'true'"/>
 
                                     <x-input-group-inline wrapperClass="md:col-span-2 min-h-[50px]" label="Beneficiário do Bolsa Família?">
-                                        <x-radio-input name="has_bolsa_familia" label="Sim" :value="true"/>
-                                        <x-radio-input name="has_bolsa_familia" label="Não" :value="false"/>
+                                        <x-radio-input wire:model="form.has_bolsa_familia" name="form.has_bolsa_familia" label="Sim" value="true"/>
+                                        <x-radio-input wire:model="form.has_bolsa_familia" name="form.has_bolsa_familia" label="Não" value="false"/>
                                     </x-input-group-inline>
 
                                     <x-input-group-inline wrapperClass="md:col-span-2 min-h-[50px]" label="Já foi contemplado com o Programa Volta por Cima?">
-                                        <x-radio-input name="covered_by_the_program_volta_por_cima" label="Sim" :value="true"/>
-                                        <x-radio-input name="covered_by_the_program_volta_por_cima" label="Não" :value="false"/>
+                                        <x-radio-input wire:model="form.covered_by_the_program_volta_por_cima" name="form.covered_by_the_program_volta_por_cima" label="Sim" value="true"/>
+                                        <x-radio-input wire:model="form.covered_by_the_program_volta_por_cima" name="form.covered_by_the_program_volta_por_cima" label="Não" value="false"/>
                                     </x-input-group-inline>
 
                                     <x-input-group-inline label="Acessa alguma cozinha social?">
-                                        <x-radio-input name="access_to_social_kitchen" label="Sim" :value="true"/>
-                                        <x-radio-input name="access_to_social_kitchen" label="Não" :value="false"/>
+                                        <x-radio-input wire:model.live="form.access_to_social_kitchen" name="form.access_to_social_kitchen" label="Sim" value="true"/>
+                                        <x-radio-input wire:model.live="form.access_to_social_kitchen" name="form.access_to_social_kitchen" label="Não" value="false"/>
                                     </x-input-group-inline>
 
-                                    <x-text-input name="social_kitchen" label="Qual Cozinha Social" placeholder="Nome da Cozinha Social"/>
+                                    <x-text-input wire:model="form.social_kitchen" name="form.social_kitchen" label="Qual Cozinha Social" placeholder="Nome da Cozinha Social" :disabled="$this->form->access_to_social_kitchen !== 'true'"/>
 
                                     <x-input-group-inline label="Possui alguma deficiência?">
-                                        <x-radio-input name="handicapped" label="Sim" :value="true"/>
-                                        <x-radio-input name="handicapped" label="Não" :value="false"/>
+                                        <x-radio-input wire:model.live="form.handicapped" name="form.handicapped" label="Sim" value="true"/>
+                                        <x-radio-input wire:model.live="form.handicapped" name="form.handicapped" label="Não" value="false"/>
                                     </x-input-group-inline>
 
-                                    <x-text-input name="deficiency" label="Tipo de deficiência" placeholder="Cegueira, cadeirante..."/>
+                                    <x-text-input name="deficiency" label="Tipo de deficiência" placeholder="Cegueira, cadeirante..." :disabled="$this->form->handicapped !== 'true'"/>
                                 </div>
 
                                 <div class="mt-16">

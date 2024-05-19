@@ -3,6 +3,8 @@
 namespace App\Livewire;
 
 use App\Enums\Gender;
+use App\Livewire\Forms\PersonRegistrationForm;
+use App\Models\Person;
 use App\Models\State;
 use Canducci\Cep\CepResponse;
 use Canducci\Cep\Facades\Cep;
@@ -14,14 +16,7 @@ use Livewire\Component;
 
 class PersonRegistration extends Component
 {
-    public string $name = '';
-    public string $cep = '';
-    public string $address = '';
-    public string $number = '';
-    public string $complement = '';
-    public string $neighborhood = '';
-    public string $uf = '';
-    public string $city = '';
+    public PersonRegistrationForm $form;
 
     #[Layout('layouts.app')]
     public function render(): Factory|\Illuminate\Foundation\Application|View|Application
@@ -42,6 +37,6 @@ class PersonRegistration extends Component
 
     public function save()
     {
-
+        $this->form->store();
     }
 }
