@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Enums\Gender;
+use App\Models\State;
 use Canducci\Cep\CepResponse;
 use Canducci\Cep\Facades\Cep;
 use Illuminate\Contracts\Foundation\Application;
@@ -29,8 +30,13 @@ class PersonRegistration extends Component
             ->map(fn ($enum) => ['value' => $enum->value, 'label' => $enum->value])
             ->toArray();
 
+        $states = State::all()
+            ->map(fn ($state) => ['value' => $state->uf, 'label' => $state->name])
+            ->toArray();
+
         return view('livewire.person-registration', [
-            'genders' => $genders
+            'genders' => $genders,
+            'states' => $states,
         ]);
     }
 

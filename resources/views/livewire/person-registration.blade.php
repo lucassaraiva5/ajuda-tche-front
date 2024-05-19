@@ -32,34 +32,34 @@
                                         <x-text-input name="phone" label="Celular" placeholder="(xx) x xxxx-xxxx" x-mask="(99) 9 9999-9999"/>
                                         <x-text-input type="email" name="email" label="E-mail" placeholder="exemplo@email.com"/>
 
-                                        <x-radio-group-inline label="Possui Cadastro Único">
+                                        <x-input-group-inline label="Possui Cadastro Único">
                                             <x-radio-input name="has_cadastro_unico" label="Sim" :value="true"/>
                                             <x-radio-input name="has_cadastro_unico" label="Não" :value="false"/>
-                                        </x-radio-group-inline>
+                                        </x-input-group-inline>
 
                                         <x-text-input name="nis_number" label="Número NIS" placeholder="Número"/>
 
-                                        <x-radio-group-inline wrapperClass="col-span-2 min-h-[50px]" label="Beneficiário do Bolsa Família">
+                                        <x-input-group-inline wrapperClass="col-span-2 min-h-[50px]" label="Beneficiário do Bolsa Família">
                                             <x-radio-input name="has_bolsa_familia" label="Sim" :value="true"/>
                                             <x-radio-input name="has_bolsa_familia" label="Não" :value="false"/>
-                                        </x-radio-group-inline>
+                                        </x-input-group-inline>
 
-                                        <x-radio-group-inline wrapperClass="col-span-2 min-h-[50px]" label="Já foi contemplado com o Programa Volta por Cima?">
+                                        <x-input-group-inline wrapperClass="col-span-2 min-h-[50px]" label="Já foi contemplado com o Programa Volta por Cima?">
                                             <x-radio-input name="covered_by_the_program_volta_por_cima" label="Sim" :value="true"/>
                                             <x-radio-input name="covered_by_the_program_volta_por_cima" label="Não" :value="false"/>
-                                        </x-radio-group-inline>
+                                        </x-input-group-inline>
 
-                                        <x-radio-group-inline label="Acessa alguma cozinha social?">
+                                        <x-input-group-inline label="Acessa alguma cozinha social?">
                                             <x-radio-input name="access_to_social_kitchen" label="Sim" :value="true"/>
                                             <x-radio-input name="access_to_social_kitchen" label="Não" :value="false"/>
-                                        </x-radio-group-inline>
+                                        </x-input-group-inline>
 
                                         <x-text-input name="social_kitchen" label="Qual Cozinha Social" placeholder="Nome da Cozinha Social"/>
 
-                                        <x-radio-group-inline label="Possui alguma deficiência?">
+                                        <x-input-group-inline label="Possui alguma deficiência?">
                                             <x-radio-input name="handicapped" label="Sim" :value="true"/>
                                             <x-radio-input name="handicapped" label="Não" :value="false"/>
-                                        </x-radio-group-inline>
+                                        </x-input-group-inline>
 
                                         <x-text-input name="deficiency" label="Tipo de deficiência" placeholder="Cegueira, cadeirante..."/>
                                     </div>
@@ -86,16 +86,23 @@
                                     </div>
 
                                     <div class="grid grid-cols-2 gap-x-5 gap-y-6">
-                                        <x-text-input name="cep" label="CEP" placeholder="00000-000" x-mask="99999-999"/>
+                                        <x-text-input wrapperClass="col-span-2" name="cep" label="CEP" placeholder="00000-000" x-mask="99999-999"/>
 
-                                        <x-text-input name="address" label="Logradouro" placeholder="Rua, Avenida, etc..." :required="true"/>
-                                        <x-text-input name="number" label="Número" placeholder="Número" :required="true"/>
+                                        <div class="grid grid-cols-4 gap-x-5 gap-y-6 col-span-2">
+                                            <x-text-input wrapperClass="col-span-3" name="address" label="Logradouro" placeholder="Rua, Avenida, etc..." :required="true"/>
+                                            <x-text-input name="number" label="Número" placeholder="Número" :required="true"/>
+                                        </div>
 
                                         <x-text-input name="complement" label="Complemento" placeholder="Complemento"/>
                                         <x-text-input name="neighborhood" label="Bairro" placeholder="Bairro" :required="true"/>
 
-                                        <x-text-input name="uf" label="Estado" placeholder="Rio Grande do sul" :required="true"/>
+                                        <x-select-input name="uf" label="Estado" placeholder="Selecione o estado" :required="true" :options="$states" />
                                         <x-text-input name="city" label="Cidade" placeholder="Selecione uma cidade" :required="true"/>
+
+                                        <x-input-group-inline wrapperClass="col-span-2 min-h-[40px]" label="Você está atualmente neste mesmo endereço?">
+                                            <x-radio-input name="its_at_the_same_address" label="Sim" :value="true"/>
+                                            <x-radio-input name="its_at_the_same_address" label="Não" :value="false"/>
+                                        </x-input-group-inline>
                                     </div>
                                 </div>
 
@@ -103,17 +110,68 @@
                                     <p class="font-semibold text-gray-700 text-uppercase mb-7">LOCALIZAÇÃO ATUAL</p>
 
                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-6">
-                                        <x-text-input name="uf" label="Estado" placeholder="Rio Grande do sul" :required="true"/>
-                                        <x-text-input name="city" label="Cidade" placeholder="Selecione uma cidade" :required="true"/>
+                                        <x-select-input name="current_uf" label="Estado" placeholder="Selecione o estado" :required="true" :options="$states" />
+                                        <x-text-input name="current_city" label="Cidade" placeholder="Selecione uma cidade" :required="true"/>
 
                                         <x-text-input name="help_place" label="Local que está abrigado(a)" placeholder="Selecione um local" :required="true"/>
                                         <x-text-input name="help_local" label="Informe o local" placeholder="Ex: Ulbra Canoas" :required="true"/>
 
-                                        <x-text-input name="address" label="Logradouro" placeholder="Rua, Avenida, etc..." :required="true"/>
-                                        <x-text-input name="number" label="Número" placeholder="Número" :required="true"/>
+                                        <div class="grid grid-cols-4 gap-x-5 gap-y-6 col-span-2">
+                                            <x-text-input wrapperClass="col-span-3" name="current_address" label="Logradouro" placeholder="Rua, Avenida, etc..." :required="true"/>
+                                            <x-text-input name="current_number" label="Número" placeholder="Número" :required="true"/>
+                                        </div>
 
-                                        <x-text-input name="complement" label="Complemento" placeholder="Complemento"/>
-                                        <x-text-input name="neighborhood" label="Bairro" placeholder="Bairro" :required="true"/>
+                                        <x-text-input name="current_complement" label="Complemento" placeholder="Complemento"/>
+                                        <x-text-input name="current_neighborhood" label="Bairro" placeholder="Bairro" :required="true"/>
+                                    </div>
+                                </div>
+
+                                <div class="mt-16">
+                                    <p class="font-semibold text-gray-700 text-uppercase mb-7">DADOS GERAIS</p>
+
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-6">
+                                        <x-input-group-inline wrapperClass="col-span-2 min-h-[40px]" label="Você declara que esteve em situação de:">
+                                            <x-radio-input name="situation" label="Desabrigado" :value="'desabrigado'"/>
+                                            <x-radio-input name="situation" label="Desalojado" :value="'desalojado'"/>
+                                            <x-radio-input name="situation" label="Atingido" :value="'atingido'"/>
+                                        </x-input-group-inline>
+
+                                        <x-input-group-inline label="Pessoa com deficiência na família?">
+                                            <x-radio-input name="family_member_with_deficiency" label="Sim" :value="true"/>
+                                            <x-radio-input name="family_member_with_deficiency" label="Não" :value="false"/>
+                                        </x-input-group-inline>
+
+                                        <x-text-input name="family_member_deficiency" label="Tipo de deficiência" placeholder="Cegueira, cadeirante..."/>
+
+                                        <x-input-group-inline label="Recebe BPC?">
+                                            <x-radio-input name="receives_BPC" label="Sim" :value="true"/>
+                                            <x-radio-input name="receives_BPC" label="Não" :value="false"/>
+                                        </x-input-group-inline>
+
+                                        <x-input-group-inline label="Alguém necessita de cuidados de saúde?">
+                                            <x-radio-input name="anyone_need_health_care" label="Sim" :value="true"/>
+                                            <x-radio-input name="anyone_need_health_care" label="Não" :value="false"/>
+                                        </x-input-group-inline>
+
+                                        <x-text-input name="who_needs_health_care" label="Quem" placeholder="Nome da pessoa"/>
+
+                                        <x-input-group-inline label="Alguém toma remédio de uso continuo?">
+                                            <x-radio-input name="anyone_take_continuous_medication" label="Sim" :value="true"/>
+                                            <x-radio-input name="anyone_take_continuous_medication" label="Não" :value="false"/>
+                                        </x-input-group-inline>
+
+                                        <x-text-input name="who_takes_continuous_medication" label="Quem" placeholder="Nome da pessoa"/>
+                                        <x-text-input name="what_medicines_is_this_person_taking" label="Quais remédios" placeholder="Nome dos remédios ou composto"/>
+
+                                        <x-input-group-inline wrapperClass="col-span-2" label="Situação do domicílio:">
+                                            <div class="grid grid-cols-2 gap-y-2 gapx-2">
+                                                <x-checkbox-input name="flooding" label="Alagamento" :value="'Alagamento'"/>
+                                                <x-checkbox-input name="damage_to_furniture_appliances" label="Danificação dos móveis/eletrodomésticos" :value="'Danificação dos móveis/eletrodomésticos'"/>
+                                                <x-checkbox-input name="damage_to_walls_floors_structure_roof" label="Danificação das paredes/pisos/estrutura/telhado" :value="'Danificação das paredes/pisos/estrutura/telhado'"/>
+                                                <x-checkbox-input name="loss_of_bed_table_and_bath_belongings" label="Perda de pertences de cama/mesa e banho" :value="'Perda de pertences de cama/mesa e banho'"/>
+                                                <x-checkbox-input name="others" label="Outros" :value="'Outros'"/>
+                                            </div>
+                                        </x-input-group-inline>
                                     </div>
                                 </div>
 
