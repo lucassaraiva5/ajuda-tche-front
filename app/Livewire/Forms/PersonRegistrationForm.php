@@ -108,6 +108,8 @@ class PersonRegistrationForm extends Form
     #[Validate('required_if:its_at_the_same_address,false')]
     public string $shelter_neighborhood = '';
 
+    public string $declared_situation = '';
+
     public array $immediate_needs = [];
 
     #[Validate('required')]
@@ -122,7 +124,7 @@ class PersonRegistrationForm extends Form
     #[Validate('required|in:true,false')]
     public string $needs_healthcare = '';
 
-    public string $who_needs_health_care = '';
+    public string $who_needs_healthcare = '';
 
     #[Validate('required|in:true,false')]
     public string $uses_continuous_medication = '';

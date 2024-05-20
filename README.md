@@ -40,7 +40,7 @@ php artisan migrate
 
 Terminal 1
 ```
- php artisan serve
+php artisan serve
 ```
 
 Terminal 2
