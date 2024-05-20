@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms;
 
+use App\Models\Person;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
@@ -110,7 +111,7 @@ class PersonRegistrationForm extends Form
     public array $immediate_needs = [];
 
     #[Validate('required')]
-public string $disabled_family_member = '';
+    public string $disabled_family_member = '';
 
     #[Validate('required_if:disabled_family_member,true')]
     public string $family_member_disability_type = '';
@@ -142,6 +143,12 @@ public string $disabled_family_member = '';
     {
         $this->validate();
 
-        dd($this->all());
+        $data = $this->except(['its_at_the_same_address', 'who_needs_health_care']);
+        $data['immediate_needs'] = implode(',', $data['immediate_needs'] ?? []);
+
+        $person = new Person($data);
+        $person->save();
+
+        dd($person);
     }
 }
