@@ -96,48 +96,32 @@
                                     <div class="grid w-full grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3">
                                         <p class="font-semibold text-gray-700 text-uppercase">COMPOSIÇÃO FAMILIAR</p>
                                         <div class="flex md:justify-end">
-                                            <button id="buttonMember" type="button"
-                                                    class="inline-flex items-center justify-center px-6 py-2 mt-2 text-base font-semibold text-white transition-all duration-200 bg-blue-500 border border-transparent rounded-full focus:outline-none hover:bg-blue-700 focus:bg-blue-700">
+                                            <button
+                                                wire:click.live="openFamilyMemberForm()"
+                                                @disabled($addingFamilyMember)
+                                                type="button"
+                                                class="inline-flex items-center justify-center px-6 py-2 mt-2 text-base font-semibold text-white transition-all duration-200 bg-blue-500 border border-transparent rounded-full focus:outline-none hover:bg-blue-700 focus:bg-blue-700 disabled:bg-gray-200"
+                                            >
                                                 Adicionar membro ao grupo
                                             </button>
                                         </div>
                                     </div>
 
-                                    @if(count($familyMember) != 0)
-                                        <div class="hidden md:block w-full mt-6 mb-6">
-                                            <table
-                                                class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                                <thead
-                                                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                                <tr>
-                                                    <th scope="col" class="px-6 py-3">
-                                                        Nome
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3">
-                                                        Data de Nascimento
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3">
-                                                        CPF/NIS
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3">
-                                                        <div class="flex items-center">
-                                                            Ocupação
-                                                        </div>
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3">
-                                                        <div class="flex items-center">
-                                                            Renda
-                                                        </div>
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3">
-                                                        <div class="flex items-center">
-                                                            Ações
-                                                        </div>
-                                                    </th>
-                                                </tr>
+                                    @if($this->hasFamilyMembers())
+                                        <div class="hidden md:block mt-6 mb-6">
+                                            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                                    <tr>
+                                                        <th scope="col" class="px-6 py-3">Nome</th>
+                                                        <th scope="col" class="px-6 py-3">Data de Nascimento</th>
+                                                        <th scope="col" class="px-6 py-3">CPF/NIS</th>
+                                                        <th scope="col" class="px-6 py-3">Ocupação</th>
+                                                        <th scope="col" class="px-6 py-3">Renda</th>
+                                                        <th scope="col" class="px-6 py-3">Ações</th>
+                                                    </tr>
                                                 </thead>
                                                 <tbody>
-                                                @foreach($familyMember as $member)
+                                                @foreach($this->familyMembers as $index => $member)
                                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                                         <th scope="row"
                                                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -156,8 +140,9 @@
                                                             {{$member['remuneration_member']}}
                                                         </td>
                                                         <td class="px-6 py-4 text-right">
-                                                            <a href="#"
-                                                               class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                                            <button type="button" wire:click.prevent="removeFamilyMember({{ $index }})" class="font-medium text-red-500">
+                                                                <x-tabler-trash/>
+                                                            </button>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -167,107 +152,114 @@
 
                                         <!-- mobile -->
                                         <div class="block md:hidden mt-8 mb-2">
-                                            <x-card-family-member name="{{$familyMember[$count]['civil_name_member']}}"
-                                                                  birthday="{{$familyMember[$count]['birth_date_member']}}"
-                                                                  cpf="{{$familyMember[$count]['cpf_nis_member']}}"
-                                                                  occupation="{{$familyMember[$count]['occupation_member']}}"
-                                                                  rent="{{$familyMember[$count]['remuneration_member']}}"
-                                                                  total="{{count($familyMember)}}" next="next"
-                                                                  previus="previus"/>
+                                            <x-card-family-member name="{{$familyMembers[$familyMemberIndexMobileCard]['civil_name_member']}}"
+                                                                  birthday="{{$familyMembers[$familyMemberIndexMobileCard]['birth_date_member']}}"
+                                                                  cpf="{{$familyMembers[$familyMemberIndexMobileCard]['cpf_nis_member']}}"
+                                                                  occupation="{{$familyMembers[$familyMemberIndexMobileCard]['occupation_member']}}"
+                                                                  rent="{{$familyMembers[$familyMemberIndexMobileCard]['remuneration_member']}}"
+                                                                  total="{{count($familyMembers)}}"
+                                                                  next="nextFamilyMemberIndexMobileCard()"
+                                                                  previus="previousFamilyMemberIndexMobileCard()"/>
                                         </div>
                                     @endif
                                 </div>
-                                <div id="formMember"
-                                     class="grid w-full grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6 hidden mt-2 mb-2">
-                                    <x-text-input wire:model="formFamily.cpf_nis_member" wrapperClass="md:col-span-2"
-                                                  name="formFamily.cpf_nis_member"
-                                                  label="CPF/NIS" placeholder="CPF" x-mask="999.999.999-99"
-                                                  :required="true"/>
-                                    <x-text-input wire:model="formFamily.civil_name_member" wrapperClass="md:col-span-2"
-                                                  name="formFamily.civil_name_member" label="Nome civil"
-                                                  placeholder="Nome"
-                                                  :required="true"/>
-                                    <x-select-input wire:model="formFamily.relationship_member"
-                                                name="formFamily.relationship_member"
-                                                label="Parentesco"
-                                                placeholder="Selecione um grau de parentesco" :required="true"
-                                                :options="$relationships"/>
-                                    <x-text-input wire:model="formFamily.birth_date_member"
-                                                  name="formFamily.birth_date_member"
-                                                  label="Data de nascimento" placeholder="DD/MM/AAAA"
-                                                  x-mask="99/99/9999" :required="true"/>
-                                    <x-select-input wire:model="formFamily.gender_member"
-                                                    name="formFamily.gender_member"
-                                                    label="Gênero"
-                                                    placeholder="Selecione um gênero" :required="true"
-                                                    :options="$genders"/>
-                                    <x-text-input wire:model="formFamily.occupation_member"
-                                                  name="formFamily.occupation_member" label="Ocupação"
-                                                  placeholder="Atividade profissional que desempenha" :required="true"/>
-                                    <x-text-input wire:model="formFamily.remuneration_member"
-                                                  name="formFamily.remuneration_member" label="Renda"
-                                                  placeholder="Remuneração mensal que recebe" :required="true"/>
-                                    <div class="sm:col-span-2 mt-8 flex justify-end">
-                                        <button
-                                            class="ms-3 inline-flex items-center justify-center px-6 py-3 mt-2 text-base font-semibold text-white transition-all duration-200 bg-red-400 border border-transparent rounded-full focus:outline-none hover:bg-blue-700 focus:bg-blue-700">
-                                            Cancelar
-                                        </button>
-                                        <button wire:click="saveMember"
-                                                class="ms-3 inline-flex items-center justify-center px-6 py-3 mt-2 text-base font-semibold text-white transition-all duration-200 bg-blue-500 border border-transparent rounded-full focus:outline-none hover:bg-blue-700 focus:bg-blue-700">
-                                            Salvar
-                                        </button>
+
+                                @if ($addingFamilyMember)
+                                    <div
+                                        class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6 mt-2 border-b pb-6">
+                                        <x-text-input wire:model="formFamily.cpf_nis_member" wrapperClass="md:col-span-2"
+                                                      name="formFamily.cpf_nis_member"
+                                                      label="CPF/NIS" placeholder="CPF" x-mask="999.999.999-99"
+                                                      :required="true"/>
+                                        <x-text-input wire:model="formFamily.civil_name_member" wrapperClass="md:col-span-2"
+                                                      name="formFamily.civil_name_member" label="Nome civil"
+                                                      placeholder="Nome"
+                                                      :required="true"/>
+                                        <x-select-input wire:model="formFamily.relationship_member"
+                                                        name="formFamily.relationship_member"
+                                                        label="Parentesco"
+                                                        placeholder="Selecione um grau de parentesco" :required="true"
+                                                        :options="$relationships"/>
+                                        <x-text-input wire:model="formFamily.birth_date_member"
+                                                      name="formFamily.birth_date_member"
+                                                      label="Data de nascimento" placeholder="DD/MM/AAAA"
+                                                      x-mask="99/99/9999" :required="true"/>
+                                        <x-select-input wire:model="formFamily.gender_member"
+                                                        name="formFamily.gender_member"
+                                                        label="Gênero"
+                                                        placeholder="Selecione um gênero" :required="true"
+                                                        :options="$genders"/>
+                                        <x-text-input wire:model="formFamily.occupation_member"
+                                                      name="formFamily.occupation_member" label="Ocupação"
+                                                      placeholder="Atividade profissional que desempenha" :required="true"/>
+                                        <x-text-input wire:model="formFamily.remuneration_member"
+                                                      name="formFamily.remuneration_member" label="Renda"
+                                                      placeholder="Remuneração mensal que recebe" :required="true"/>
+                                        <div class="sm:col-span-2 mt-8 flex justify-end">
+                                            <button
+                                                wire:click="closeFamilyMemberForm()"
+                                                type="button"
+                                                class="ms-3 inline-flex items-center justify-center px-6 py-3 mt-2 text-base font-semibold text-white transition-all duration-200 bg-red-400 border border-transparent rounded-full focus:outline-none hover:bg-red-500 focus:bg-red-500">
+                                                Cancelar
+                                            </button>
+                                            <button wire:click="addFormFamily()"
+                                                    type="button"
+                                                    class="ms-3 inline-flex items-center justify-center px-6 py-3 mt-2 text-base font-semibold text-white transition-all duration-200 bg-blue-500 border border-transparent rounded-full focus:outline-none hover:bg-blue-700 focus:bg-blue-700">
+                                                Salvar
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                             </div>
 
                             <div class="mt-16">
-                                    <p class="font-semibold text-gray-700 text-uppercase mb-4">ENDEREÇO</p>
-                                    <div class="px-4 py-2.5 bg-blue-200/90 rounded-lg flex items-center mb-4">
-                                        <x-tabler-info-circle-filled class="h-5 w-5 text-blue-500"/>
-                                        <p class="ms-1.5 text-sm text-gray-600">Adicione informações do seu endereço (antes das enchentes).</p>
-                                    </div>
-                                    <div class="grid w-full grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
-                                        <x-text-input wrapperClass="md:col-span-2" wire:model="form.zip_code" name="form.zip_code" label="CEP" placeholder="00000-000" x-mask="99999-999"/>
-                                        <div class="grid grid-cols-1 md:grid-cols-4 gap-x-5 gap-y-6 md:col-span-2">
-                                            <x-text-input wrapperClass="md:col-span-3" wire:model="form.street" name="form.street" label="Logradouro" placeholder="Rua, Avenida, etc..." :required="true"/>
-                                            <x-text-input wire:model="form.number" name="form.number" label="Número" placeholder="Número" :required="true"/>
-                                        </div>
-                                        <x-text-input wire:model="form.complement" name="form.complement" label="Complemento" placeholder="Complemento"/>
-                                        <x-text-input wire:model="form.neighborhood" name="form.neighborhood" label="Bairro" placeholder="Bairro" :required="true"/>
-                                        <x-select-input wire:model="form.state" name="form.state" label="Estado" placeholder="Selecione o estado" :required="true" :options="$states"/>
-                                        <x-text-input wire:model="form.city" name="form.city" label="Cidade" placeholder="Selecione uma cidade" :required="true"/>
-                                        <x-input-group-inline wrapperClass="md:col-span-2 min-h-[60px]" label="Você está atualmente neste mesmo endereço?">
-                                            <x-radio-input wire:model="form.its_at_the_same_address" name="form.its_at_the_same_address" label="Sim" value="true"/>
-                                            <x-radio-input wire:model="form.its_at_the_same_address" name="form.its_at_the_same_address" label="Não" value="false"/>
-                                        </x-input-group-inline>
-                                    </div>
+                                <p class="font-semibold text-gray-700 text-uppercase mb-4">ENDEREÇO</p>
+                                <div class="px-4 py-2.5 bg-blue-200/90 rounded-lg flex items-center mb-4">
+                                    <x-tabler-info-circle-filled class="h-5 w-5 text-blue-500"/>
+                                    <p class="ms-1.5 text-sm text-gray-600">Adicione informações do seu endereço (antes das enchentes).</p>
                                 </div>
-                                <div id="shelter_localization" class="mt-16 hidden">
-                                    <p class="font-semibold text-gray-700 text-uppercase mb-7">LOCALIZAÇÃO ATUAL</p>
-                                    <div class="grid w-full grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
-                                        <x-select-input wire:model="form.shelter_state" name="form.shelter_state" label="Estado" placeholder="Selecione o estado"  :options="$states"/>
+                                <div class="grid w-full grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
+                                    <x-text-input wrapperClass="md:col-span-2" wire:model="form.zip_code" name="form.zip_code" label="CEP" placeholder="00000-000" x-mask="99999-999"/>
+                                    <div class="grid grid-cols-1 md:grid-cols-4 gap-x-5 gap-y-6 md:col-span-2">
+                                        <x-text-input wrapperClass="md:col-span-3" wire:model="form.street" name="form.street" label="Logradouro" placeholder="Rua, Avenida, etc..." :required="true"/>
+                                        <x-text-input wire:model="form.number" name="form.number" label="Número" placeholder="Número" :required="true"/>
+                                    </div>
+                                    <x-text-input wire:model="form.complement" name="form.complement" label="Complemento" placeholder="Complemento"/>
+                                    <x-text-input wire:model="form.neighborhood" name="form.neighborhood" label="Bairro" placeholder="Bairro" :required="true"/>
+                                    <x-select-input wire:model="form.state" name="form.state" label="Estado" placeholder="Selecione o estado" :required="true" :options="$states"/>
+                                    <x-text-input wire:model="form.city" name="form.city" label="Cidade" placeholder="Selecione uma cidade" :required="true"/>
+                                    <x-input-group-inline wrapperClass="md:col-span-2 min-h-[60px]" label="Você está atualmente neste mesmo endereço?">
+                                        <x-radio-input wire:model="form.its_at_the_same_address" name="form.its_at_the_same_address" label="Sim" value="true"/>
+                                        <x-radio-input wire:model="form.its_at_the_same_address" name="form.its_at_the_same_address" label="Não" value="false"/>
+                                    </x-input-group-inline>
+                                </div>
+                            </div>
+                            <div id="shelter_localization" class="mt-16 hidden">
+                                <p class="font-semibold text-gray-700 text-uppercase mb-7">LOCALIZAÇÃO ATUAL</p>
+                                <div class="grid w-full grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
+                                    <x-select-input wire:model="form.shelter_state" name="form.shelter_state" label="Estado" placeholder="Selecione o estado" :options="$states"/>
                                     <x-text-input wire:model="form.shelter_city" name="form.shelter_city"
                                                   label="Cidade" placeholder="Selecione uma cidade"
-                                                  />
+                                    />
                                     <x-text-input wire:model="form.shelter_location" name="form.shelter_location"
                                                   label="Local que está abrigado(a)"
-                                                  placeholder="Selecione um local" />
+                                                  placeholder="Selecione um local"/>
                                     <x-text-input wire:model="form.shelter_info" name="form.shelter_info"
                                                   label="Informe o local" placeholder="Ex: Ulbra Canoas"
-                                                  />
+                                    />
                                     <div class="grid md:grid-cols-4 gap-x-5 gap-y-6 md:col-span-2">
                                         <x-text-input wrapperClass="md:col-span-3" wire:model="form.shelter_street"
                                                       name="form.shelter_street" label="Logradouro"
-                                                      placeholder="Rua, Avenida, etc..." />
+                                                      placeholder="Rua, Avenida, etc..."/>
                                         <x-text-input wire:model="form.shelter_number" name="form.shelter_number"
-                                                      label="Número" placeholder="Número" />
+                                                      label="Número" placeholder="Número"/>
                                     </div>
                                     <x-text-input wire:model="form.shelter_complement"
                                                   name="form.shelter_complement" label="Complemento"
                                                   placeholder="Complemento"/>
                                     <x-text-input wire:model="form.shelter_neighborhood"
                                                   name="form.shelter_neighborhood" label="Bairro"
-                                                  placeholder="Bairro" />
+                                                  placeholder="Bairro"/>
                                 </div>
                             </div>
                             <div class="mt-16">
@@ -434,27 +426,15 @@
         <script>
             document.querySelectorAll('[name="form.its_at_the_same_address"]').forEach((el) => {
                 el.addEventListener('change', function (event) {
-                    const localization = document.getElementById('shelter_localization');
+                    const localization = document.getElementById('shelter_localization')
 
                     if (event.target.value === 'false') {
-                        localization.classList.remove('hidden');
+                        localization.classList.remove('hidden')
                     } else {
-                        localization.classList.add('hidden');
+                        localization.classList.add('hidden')
                     }
                 })
-            });
-
-            const formMember = document.getElementById('formMember')
-            const buttonMember = document.getElementById('buttonMember')
-
-            buttonMember.addEventListener('click', () => {
-                if (formMember.classList.contains('hidden')) {
-                    formMember.classList.remove('hidden')
-                } else {
-                    formMember.classList.add('hidden')
-                }
             })
-
         </script>
     @endpush
 </div>

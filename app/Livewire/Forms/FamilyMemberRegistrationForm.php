@@ -26,9 +26,4 @@ class FamilyMemberRegistrationForm extends Form
 
     #[Validate('required')]
     public string $remuneration_member = '';
-
-    public function storeMember(array &$familyMember)
-    {
-        $familyMember[] = $this->all();
-    }
 }

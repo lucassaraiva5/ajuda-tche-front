@@ -6,11 +6,14 @@ use App\Enums\Gender;
 use App\Enums\Relation;
 use App\Livewire\Forms\FamilyMemberRegistrationForm;
 use App\Livewire\Forms\PersonRegistrationForm;
+use App\Models\FamilyMember;
 use App\Models\State;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Arr;
+use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -19,9 +22,11 @@ class PersonRegistration extends Component
     public PersonRegistrationForm $form;
     public FamilyMemberRegistrationForm $formFamily;
 
-    public $count = 0;
+    public bool $addingFamilyMember = false;
 
-    public $familyMembers = [];
+    public int $familyMemberIndexMobileCard = 0;
+
+    public array $familyMembers = [];
 
     #[Layout('layouts.app')]
     public function render(): Factory|\Illuminate\Foundation\Application|View|Application
@@ -31,8 +36,8 @@ class PersonRegistration extends Component
             ->toArray();
 
         $relationships = collect(Relation::cases())
-        ->map(fn($enum) => ['value' => $enum->value, 'label' => $enum->value])
-        ->toArray();
+            ->map(fn($enum) => ['value' => $enum->value, 'label' => $enum->value])
+            ->toArray();
 
         $states = State::all()
             ->map(fn($state) => ['value' => $state->uf, 'label' => $state->name])
@@ -42,9 +47,18 @@ class PersonRegistration extends Component
             'genders' => $genders,
             'relationships' => $relationships,
             'states' => $states,
-            'familyMember' => $this->familyMembers,
-            'count' => $this->count
         ]);
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function addFormFamily(): void
+    {
+        $this->formFamily->validate();
+        $this->familyMembers[] = $this->formFamily->toArray();
+
+        $this->closeFamilyMemberForm();
     }
 
     public function save(): RedirectResponse
@@ -56,18 +70,35 @@ class PersonRegistration extends Component
         return redirect()->back()->with('success', 'Seu cadastro foi enviado com sucesso!');
     }
 
-    public function saveMember()
+    public function openFamilyMemberForm(): void
     {
-        $this->formFamily->storeMember($this->familyMembers);
+        $this->addingFamilyMember = true;
     }
 
-    public function next()
+    public function closeFamilyMemberForm(): void
     {
-        $this->count++;
+        $this->formFamily->reset();
+
+        $this->addingFamilyMember = false;
     }
 
-    public function previus()
+    public function nextFamilyMemberIndexMobileCard(): void
     {
-        $this->count--;
+        $this->familyMemberIndexMobileCard = max($this->familyMemberIndexMobileCard++, count($this->familyMembers) - 1);
+    }
+
+    public function previousFamilyMemberIndexMobileCard(): void
+    {
+        $this->familyMemberIndexMobileCard = min($this->familyMemberIndexMobileCard--, 0);
+    }
+
+    public function hasFamilyMembers(): bool
+    {
+        return count($this->familyMembers) > 0;
+    }
+
+    public function removeFamilyMember($index): void
+    {
+        Arr::forget($this->familyMembers, $index);
     }
 }
