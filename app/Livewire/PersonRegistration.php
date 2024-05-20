@@ -12,6 +12,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
@@ -61,13 +62,16 @@ class PersonRegistration extends Component
         $this->closeFamilyMemberForm();
     }
 
-    public function save(): RedirectResponse
+    public function save()
     {
-        $this->form->store();
+        $this->form->store(
+            collect($this->familyMembers)
+                ->map(fn($familyMember) => new FamilyMember($familyMember))
+        );
 
-        $this->dispatch('personSaved');
-
-        return redirect()->back()->with('success', 'Seu cadastro foi enviado com sucesso!');
+        return redirect()
+            ->route('home')
+            ->with('success', 'Seu cadastro foi enviado com sucesso!');
     }
 
     public function openFamilyMemberForm(): void

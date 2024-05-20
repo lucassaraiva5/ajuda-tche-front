@@ -2,7 +2,10 @@
 
 namespace App\Livewire\Forms;
 
+use App\Models\FamilyMember;
 use App\Models\Person;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
@@ -141,14 +144,23 @@ class PersonRegistrationForm extends Form
     /**
      * @throws ValidationException
      */
-    public function store(): void
+    public function store(Collection $membersOfFamily): void
     {
         $this->validate();
 
         $data = $this->all();
         $data['immediate_needs'] = implode(',', $data['immediate_needs'] ?? []);
 
+        DB::beginTransaction();
+
         $person = new Person($data);
         $person->save();
+
+        $membersOfFamily->each(function (FamilyMember $familyMember) use ($person) {
+            $familyMember->person()->associate($person);
+            $familyMember->save();
+        });
+
+        DB::commit();
     }
 }

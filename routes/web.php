@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('portal');
-});
+})
+    ->name('home');
 
 Route::get('/cadastro', LandingPage::class)
     ->name('landing-page');

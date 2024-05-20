@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Person extends Model
 {
@@ -23,6 +24,11 @@ class Person extends Model
         'needs_healthcare' => 'boolean',
         'uses_continuous_medication' => 'boolean',
     ];
+
+    public function familyMembers(): HasMany
+    {
+        return $this->hasMany(FamilyMember::class);
+    }
 
     public function getAgeAttribute(): int
     {
