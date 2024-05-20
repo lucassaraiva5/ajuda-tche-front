@@ -23,4 +23,9 @@ class Person extends Model
         'needs_healthcare' => 'boolean',
         'uses_continuous_medication' => 'boolean',
     ];
+
+    public function getAgeAttribute(): int
+    {
+        return abs(now()->diffInYears($this->birth_date));
+    }
 }

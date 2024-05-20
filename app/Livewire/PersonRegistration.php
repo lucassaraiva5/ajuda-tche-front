@@ -4,10 +4,7 @@ namespace App\Livewire;
 
 use App\Enums\Gender;
 use App\Livewire\Forms\PersonRegistrationForm;
-use App\Models\Person;
 use App\Models\State;
-use Canducci\Cep\CepResponse;
-use Canducci\Cep\Facades\Cep;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
