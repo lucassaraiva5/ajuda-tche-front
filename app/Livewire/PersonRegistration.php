@@ -11,6 +11,7 @@ use Canducci\Cep\Facades\Cep;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -35,8 +36,12 @@ class PersonRegistration extends Component
         ]);
     }
 
-    public function save()
+    public function save(): RedirectResponse
     {
         $this->form->store();
+
+        $this->dispatch('personSaved');
+
+        return redirect()->back()->with('success', 'Seu cadastro foi enviado com sucesso!');
     }
 }

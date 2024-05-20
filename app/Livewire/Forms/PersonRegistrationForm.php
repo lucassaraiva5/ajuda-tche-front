@@ -145,12 +145,10 @@ class PersonRegistrationForm extends Form
     {
         $this->validate();
 
-        $data = $this->except(['its_at_the_same_address', 'who_needs_health_care']);
+        $data = $this->all();
         $data['immediate_needs'] = implode(',', $data['immediate_needs'] ?? []);
 
         $person = new Person($data);
         $person->save();
-
-        dd($person);
     }
 }
