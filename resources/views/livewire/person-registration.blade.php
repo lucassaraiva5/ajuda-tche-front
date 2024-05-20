@@ -147,7 +147,7 @@
                                                             {{$member['birth_date_member']}}
                                                         </td>
                                                         <td class="px-6 py-4">
-                                                            {{$member['cpf_member']}}
+                                                            {{$member['cpf_nis_member']}}
                                                         </td>
                                                         <td class="px-6 py-4">
                                                             {{$member['occupation_member']}}
@@ -169,7 +169,7 @@
                                         <div class="block md:hidden mt-8 mb-2">
                                             <x-card-family-member name="{{$familyMember[$count]['civil_name_member']}}"
                                                                   birthday="{{$familyMember[$count]['birth_date_member']}}"
-                                                                  cpf="{{$familyMember[$count]['cpf_member']}}"
+                                                                  cpf="{{$familyMember[$count]['cpf_nis_member']}}"
                                                                   occupation="{{$familyMember[$count]['occupation_member']}}"
                                                                   rent="{{$familyMember[$count]['remuneration_member']}}"
                                                                   total="{{count($familyMember)}}" next="next"
@@ -179,22 +179,19 @@
                                 </div>
                                 <div id="formMember"
                                      class="grid w-full grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6 hidden mt-2 mb-2">
-                                    <x-text-input wire:model="formFamily.cpf_member" wrapperClass="md:col-span-2"
-                                                  name="formFamily.cpf_member"
-                                                  label="CPF" placeholder="CPF" x-mask="999.999.999-99"
+                                    <x-text-input wire:model="formFamily.cpf_nis_member" wrapperClass="md:col-span-2"
+                                                  name="formFamily.cpf_nis_member"
+                                                  label="CPF/NIS" placeholder="CPF" x-mask="999.999.999-99"
                                                   :required="true"/>
                                     <x-text-input wire:model="formFamily.civil_name_member" wrapperClass="md:col-span-2"
                                                   name="formFamily.civil_name_member" label="Nome civil"
                                                   placeholder="Nome"
                                                   :required="true"/>
-                                    <x-text-input wire:model="formFamily.social_name_member"
-                                                  wrapperClass="md:col-span-2"
-                                                  name="formFamily.social_name_member" label="Nome social"
-                                                  placeholder="Nome"/>
-                                    <x-text-input wire:model="formFamily.mother_name_member"
-                                                  wrapperClass="md:col-span-2"
-                                                  name="formFamily.mother_name_member" label="Nome da mãe"
-                                                  placeholder="Nome da mãe"/>
+                                    <x-select-input wire:model="formFamily.relationship_member"
+                                                name="formFamily.relationship_member"
+                                                label="Parentesco"
+                                                placeholder="Selecione um grau de parentesco" :required="true"
+                                                :options="$relationships"/>
                                     <x-text-input wire:model="formFamily.birth_date_member"
                                                   name="formFamily.birth_date_member"
                                                   label="Data de nascimento" placeholder="DD/MM/AAAA"

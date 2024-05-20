@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Enums\Gender;
+use App\Enums\Relation;
 use App\Livewire\Forms\FamilyMemberRegistrationForm;
 use App\Livewire\Forms\PersonRegistrationForm;
 use App\Models\State;
@@ -20,6 +21,8 @@ class PersonRegistration extends Component
 
     public $count = 0;
 
+    public $familyMembers = [];
+
     #[Layout('layouts.app')]
     public function render(): Factory|\Illuminate\Foundation\Application|View|Application
     {
@@ -27,29 +30,19 @@ class PersonRegistration extends Component
             ->map(fn($enum) => ['value' => $enum->value, 'label' => $enum->value])
             ->toArray();
 
+        $relationships = collect(Relation::cases())
+        ->map(fn($enum) => ['value' => $enum->value, 'label' => $enum->value])
+        ->toArray();
+
         $states = State::all()
             ->map(fn($state) => ['value' => $state->uf, 'label' => $state->name])
             ->toArray();
 
         return view('livewire.person-registration', [
             'genders' => $genders,
+            'relationships' => $relationships,
             'states' => $states,
-            'familyMember' => [
-                [
-                    'civil_name_member' => 'Maria da Silva',
-                    'birth_date_member' => '1990-05-15',
-                    'cpf_member' => '123.456.789-00',
-                    'occupation_member' => 'Professor',
-                    'remuneration_member' => 'R$ 3.500,00'
-                ],
-                [
-                    'civil_name_member' => 'João Oliveira',
-                    'birth_date_member' => '1985-08-20',
-                    'cpf_member' => '987.654.321-00',
-                    'occupation_member' => 'Engenheiro',
-                    'remuneration_member' => 'R$ 5.200,00'
-                ],
-            ],
+            'familyMember' => $this->familyMembers,
             'count' => $this->count
         ]);
     }
@@ -65,7 +58,7 @@ class PersonRegistration extends Component
 
     public function saveMember()
     {
-        $this->formFamily->storeMember();
+        $this->formFamily->storeMember($this->familyMembers);
     }
 
     public function next()

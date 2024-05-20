@@ -8,15 +8,12 @@ use Livewire\Form;
 class FamilyMemberRegistrationForm extends Form
 {
     #[Validate('required|cpf|unique:people,cpf')]
-    public string $cpf_member = '';
+    public string $cpf_nis_member = '';
 
     #[Validate('required')]
     public string $civil_name_member = '';
 
-    public string $social_name_member = '';
-
-    #[Validate('required')]
-    public string $mother_name_member = '';
+    public string $relationship_member = '';
 
     #[Validate('required|date')]
     public string $birth_date_member = '';
@@ -30,8 +27,8 @@ class FamilyMemberRegistrationForm extends Form
     #[Validate('required')]
     public string $remuneration_member = '';
 
-    public function storeMember(): void
+    public function storeMember(array &$familyMember)
     {
-        dd($this->all());
+        $familyMember[] = $this->all();
     }
 }
