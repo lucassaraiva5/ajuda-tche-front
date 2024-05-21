@@ -138,7 +138,7 @@ class PersonRegistrationForm extends Form
     public string $which_continuous_medications = '';
 
     #[Validate('required')]
-    public string $housing_status = '';
+    public array $housing_status = [];
 
     public string $others_housing_status = '';
 
@@ -151,7 +151,7 @@ class PersonRegistrationForm extends Form
 
         $data = $this->all();
         $data['immediate_needs'] = implode(',', $data['immediate_needs'] ?? []);
-
+        $data['housing_status'] = implode(',', $data['housing_status'] ?? []);
         DB::beginTransaction();
 
         

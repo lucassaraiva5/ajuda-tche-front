@@ -387,9 +387,9 @@
                                         </div>
                                     </x-input-group-inline>
                                     <x-text-input wire:model="form.others_housing_status"
-                                                  name="form.others_housing_status" label="Outros"
-                                                  placeholder="Especificar outros"
-                                                  :disabled="strpos($this->form->housing_status, 'Outros') !== false"/>
+                                        name="form.others_housing_status" label="Outros"
+                                        placeholder="Especificar outros"
+                                        :disabled="null !== ($this->form->housing_status['Outros'] ?? null)"/>
                                 </div>
                                 <div class="mt-12 md:mt-32 grid grid-cols-1 gap-y-5">
                                     <x-checkbox-input wire:model="form.agree_terms_of_use"
