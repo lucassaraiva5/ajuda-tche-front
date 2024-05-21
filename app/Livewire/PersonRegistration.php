@@ -70,8 +70,7 @@ class PersonRegistration extends Component
         );
 
         return redirect()
-            ->route('home')
-            ->with('success', 'Seu cadastro foi enviado com sucesso!');
+            ->route('user-registered');
     }
 
     public function openFamilyMemberForm(): void
