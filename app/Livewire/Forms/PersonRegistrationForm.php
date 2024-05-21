@@ -4,6 +4,7 @@ namespace App\Livewire\Forms;
 
 use App\Models\FamilyMember;
 use App\Models\Person;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -153,10 +154,19 @@ class PersonRegistrationForm extends Form
 
         DB::beginTransaction();
 
+        
+        $formattedDate = Carbon::createFromFormat('d/m/Y', $this->birth_date)->format('Y-m-d');
+        $data['birth_date'] = $formattedDate;
+
         $person = new Person($data);
         $person->save();
 
         $membersOfFamily->each(function (FamilyMember $familyMember) use ($person) {
+            if (isset($familyMember->birth_date_member)) {
+                $formattedDate = Carbon::createFromFormat('d/m/Y', $familyMember->birth_date_member)->format('Y-m-d');
+                $familyMember->birth_date_member = $formattedDate;
+            }
+
             $familyMember->person()->associate($person);
             $familyMember->save();
         });
