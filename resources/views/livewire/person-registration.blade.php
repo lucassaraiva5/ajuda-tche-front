@@ -64,7 +64,7 @@
                                                        value="false"/>
                                     </x-input-group-inline>
                                     <x-input-group-inline wrapperClass="md:col-span-2 min-h-[50px]"
-                                                          label="Beneficiário do Programa São Leo Mais Renda?">
+                                                          label="Beneficiário de algum programa na sua cidade?">
                                         <x-radio-input wire:model="form.city_beneficiary" name="form.city_beneficiary"
                                                        label="Sim" value="true"/>
                                         <x-radio-input wire:model="form.city_beneficiary" name="form.city_beneficiary"
