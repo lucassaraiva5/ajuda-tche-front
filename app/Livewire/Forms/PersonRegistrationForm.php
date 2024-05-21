@@ -23,7 +23,7 @@ class PersonRegistrationForm extends Form
     #[Validate('required')]
     public string $mother_name = '';
 
-    #[Validate('required|date')]
+    #[Validate('required|date_format:d/m/Y')]
     public string $birth_date = '';
 
     #[Validate('required')]

@@ -15,7 +15,7 @@ class FamilyMemberRegistrationForm extends Form
 
     public string $relationship_member = '';
 
-    #[Validate('required|date')]
+    #[Validate('required|date_format:d/m/Y')]
     public string $birth_date_member = '';
 
     #[Validate('required')]
