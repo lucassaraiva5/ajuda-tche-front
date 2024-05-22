@@ -13,6 +13,7 @@ class FamilyMemberRegistrationForm extends Form
     #[Validate('required')]
     public string $civil_name_member = '';
 
+    #[Validate('required')]
     public string $relationship_member = '';
 
     #[Validate('required|date_format:d/m/Y')]
@@ -21,9 +22,7 @@ class FamilyMemberRegistrationForm extends Form
     #[Validate('required')]
     public string $gender_member = '';
 
-    #[Validate('required')]
     public string $occupation_member = '';
 
-    #[Validate('required')]
     public string $remuneration_member = '';
 }

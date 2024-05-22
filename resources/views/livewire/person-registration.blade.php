@@ -102,7 +102,7 @@
                                                 type="button"
                                                 class="inline-flex items-center justify-center px-6 py-2 mt-2 text-base font-semibold text-white transition-all duration-200 bg-blue-500 border border-transparent rounded-full focus:outline-none hover:bg-blue-700 focus:bg-blue-700 disabled:bg-gray-200"
                                             >
-                                                Adicionar membro ao grupo
+                                                Incluir Familiar
                                             </button>
                                         </div>
                                     </div>
@@ -191,10 +191,10 @@
                                                         :options="$genders"/>
                                         <x-text-input wire:model="formFamily.occupation_member"
                                                       name="formFamily.occupation_member" label="Ocupação"
-                                                      placeholder="Atividade profissional que desempenha" :required="true"/>
+                                                      placeholder="Atividade profissional que desempenha"/>
                                         <x-text-input wire:model="formFamily.remuneration_member"
                                                       name="formFamily.remuneration_member" label="Renda"
-                                                      placeholder="Remuneração mensal que recebe" :required="true"/>
+                                                      placeholder="Remuneração mensal que recebe"/>
                                         <div class="sm:col-span-2 mt-8 flex justify-end">
                                             <button
                                                 wire:click="closeFamilyMemberForm()"
@@ -213,7 +213,7 @@
                             </div>
 
                             <div class="mt-16">
-                                <p class="font-semibold text-gray-700 text-uppercase mb-4">ENDEREÇO</p>
+                                <p class="font-semibold text-gray-700 text-uppercase mb-4">ENDEREÇO DA RESIDÊNCIA AFETADA PELA ENCHENTE</p>
                                 <div class="px-4 py-2.5 bg-blue-200/90 rounded-lg flex items-center mb-4">
                                     <x-tabler-info-circle-filled class="h-5 w-5 text-blue-500"/>
                                     <p class="ms-1.5 text-sm text-gray-600">Adicione informações do seu endereço (antes das enchentes).</p>
@@ -228,14 +228,14 @@
                                     <x-text-input wire:model="form.neighborhood" name="form.neighborhood" label="Bairro" placeholder="Bairro" :required="true"/>
                                     <x-select-input wire:model="form.state" name="form.state" label="Estado" placeholder="Selecione o estado" :required="true" :options="$states"/>
                                     <x-text-input wire:model="form.city" name="form.city" label="Cidade" placeholder="Selecione uma cidade" :required="true"/>
-                                    <x-input-group-inline wrapperClass="md:col-span-2 min-h-[60px]" label="Você está atualmente neste mesmo endereço?">
-                                        <x-radio-input wire:model="form.its_at_the_same_address" name="form.its_at_the_same_address" label="Sim" value="true"/>
-                                        <x-radio-input wire:model="form.its_at_the_same_address" name="form.its_at_the_same_address" label="Não" value="false"/>
+                                    <x-input-group-inline wrapperClass="md:col-span-2 min-h-[60px]" label="A família precisou sair de casa?">
+                                        <x-radio-input wire:model="form.its_at_the_same_address" name="form.its_at_the_same_address" label="Sim" value="false"/>
+                                        <x-radio-input wire:model="form.its_at_the_same_address" name="form.its_at_the_same_address" label="Não" value="true"/>
                                     </x-input-group-inline>
                                 </div>
                             </div>
                             <div id="shelter_localization" class="mt-16 hidden">
-                                <p class="font-semibold text-gray-700 text-uppercase mb-7">LOCALIZAÇÃO ATUAL</p>
+                                <p class="font-semibold text-gray-700 text-uppercase mb-7">ENDEREÇO DE ONDE A FAMÍLIA ESTÁ AGORA</p>
                                 <div class="grid w-full grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
                                     <x-select-input wire:model="form.shelter_state" name="form.shelter_state" label="Estado" placeholder="Selecione o estado" :options="$states"/>
                                     <x-text-input wire:model="form.shelter_city" name="form.shelter_city"
