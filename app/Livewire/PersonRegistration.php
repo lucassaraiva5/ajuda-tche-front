@@ -127,7 +127,7 @@ class PersonRegistration extends Component
         $cacheKey = 'cities_for_state_' . $this->form->state;
 
         // Cache o resultado da consulta
-        $cities = Cache::remember($cacheKey, 3600, function () {
+        $cities = Cache::remember($cacheKey, 86400, function () {
             return City::whereStateUf($this->form->state)
                 ->get()
                 ->map(fn($city) => ['value' => $city->id, 'label' => $city->name])
