@@ -4,6 +4,11 @@
             <div class="max-w-5xl mx-auto">
                 <div class="overflow-hidden bg-transparent md:bg-white rounded-xl">
                     <div class="md:px-12 md:py-16">
+
+                        <div class="col-6">
+                            <img src="{{ asset('imagens/header-sao-leopoldo.jpg')}}" alt="">
+                        </div>
+
                         <div class="mb-16">
                             <img class="h-5" src="{{ asset('branding/logo.svg') }}" alt="{{ config('app.name') }}">
 
