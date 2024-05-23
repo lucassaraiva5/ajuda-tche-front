@@ -90,7 +90,7 @@ class PersonRegistrationForm extends Form
     /**
      * @throws ValidationException
      */
-    public function store(Collection $membersOfFamily): void
+    public function store(Collection $membersOfFamily)
     {
         $this->validate();
         $data = $this->all();
@@ -116,5 +116,7 @@ class PersonRegistrationForm extends Form
         });
 
         DB::commit();
+
+        return $person->id;
     }
 }

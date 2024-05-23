@@ -15,6 +15,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -68,13 +69,23 @@ class PersonRegistration extends Component
 
     public function save()
     {
-        $this->form->store(
+       $id =  $this->form->store(
             collect($this->familyMembers)
                 ->map(fn($familyMember) => new FamilyMember($familyMember))
         );
 
+        $protocol = $this->generateProtocolNumber($id);
+        Session::flash('protocol', $protocol);
+
         return redirect()
             ->route('user-registered');
+    }
+
+    public function generateProtocolNumber($id) {
+        $prefix = "PROT";
+        $date = date('Ymd');
+        $protocolNumber = $prefix . '-' . $date . '-' . str_pad($id, 6, '0', STR_PAD_LEFT);
+        return $protocolNumber;
     }
 
     public function openFamilyMemberForm(): void

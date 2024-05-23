@@ -23,6 +23,7 @@ class UserRegistered extends Component
     #[Layout('layouts.app')]
     public function render(): Factory|\Illuminate\Foundation\Application|View|Application
     {
-        return view('livewire.user-registered');
+        $protocol = session('protocol');
+        return view('livewire.user-registered', [$protocol]);
     }
 }
