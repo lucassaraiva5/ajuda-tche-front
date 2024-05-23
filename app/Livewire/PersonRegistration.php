@@ -6,6 +6,7 @@ use App\Enums\Gender;
 use App\Enums\Relation;
 use App\Livewire\Forms\FamilyMemberRegistrationForm;
 use App\Livewire\Forms\PersonRegistrationForm;
+use App\Models\City;
 use App\Models\FamilyMember;
 use App\Models\State;
 use Illuminate\Contracts\Foundation\Application;
@@ -29,6 +30,16 @@ class PersonRegistration extends Component
 
     public array $familyMembers = [];
 
+    public array $cities = [];
+
+    public $selectedState = 'RS';
+
+    public $selectedCity;
+
+    public $selectedStateShelter = 'RS';
+
+    public $selectedStateCity;
+
     #[Layout('layouts.app')]
     public function render(): Factory|\Illuminate\Foundation\Application|View|Application
     {
@@ -48,7 +59,13 @@ class PersonRegistration extends Component
             'genders' => $genders,
             'relationships' => $relationships,
             'states' => $states,
+            'cities' => $this->cities
         ]);
+    }
+    public function updatedFormState()
+    {
+        $this->cities = City::where('state_uf', $this->form->state)->pluck('name', 'id')->toArray();
+        //$this->form->city = '';
     }
 
     /**

@@ -7,7 +7,7 @@ use Livewire\Form;
 
 class FamilyMemberRegistrationForm extends Form
 {
-    #[Validate('required|cpf|unique:people,cpf')]
+    #[Validate('required|cpf')]
     public string $cpf_nis_member = '';
 
     #[Validate('required')]
@@ -19,7 +19,6 @@ class FamilyMemberRegistrationForm extends Form
     #[Validate('required|date_format:d/m/Y')]
     public string $birth_date_member = '';
 
-    #[Validate('required')]
     public string $gender_member = '';
 
     public string $occupation_member = '';

@@ -5,7 +5,8 @@
     'required' => false,
     'placeholder' => '',
     'type' => 'text',
-    'wrapperClass' => []
+    'wrapperClass' => [],
+    'selected' => ''
 ])
 
 <div @class($wrapperClass)>
@@ -31,7 +32,9 @@
             @endif
 
             @foreach ($options as $option)
-                <option value="{{ $option['value'] }}">{{ $option['label'] }}</option>
+                <option value="{{ $option['value'] }}" @if($option['value'] == $selected) selected @endif>
+                    {{ $option['label'] }}
+                </option>
             @endforeach
         </select>
     </div>
