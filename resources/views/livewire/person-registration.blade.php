@@ -149,8 +149,8 @@
                                     </div>
                                     <x-text-input wire:model="form.complement" name="form.complement" label="Complemento" placeholder="Complemento"/>
                                     <x-text-input wire:model="form.neighborhood" name="form.neighborhood" label="Bairro" placeholder="Bairro" :required="true"/>
-                                    <x-select-input wire:model="form.state" name="form.state" label="Estado" placeholder="Selecione o estado" :required="true" :options="$states"/>
-                                    <x-select-input wire:key="{{ $this->form->state }}" wire:model="form.city" label="Cidade" name="form.city" :required="true" :options="$this->getStatesToSelectBox()"/>
+                                    <x-select-input wire:model.live="form.state" wire:model="form.state" name="form.state" label="Estado" placeholder="Selecione o estado" :required="true" :options="$states"/>
+                                    <x-select-input wire:model.live="form.city" wire:key="{{ $this->form->state }}" wire:model="form.city" label="Cidade" name="form.city" :required="true" :options="$this->getStatesToSelectBox()"/>
 
                                 </div>
                             </div>

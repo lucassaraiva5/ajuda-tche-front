@@ -15,6 +15,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
@@ -122,6 +123,17 @@ class PersonRegistration extends Component
 
     public function getStatesToSelectBox()
     {
-        return City::whereStateUf($this->form->state)->get()->map(fn($city) => ['value' => $city->id, 'label' => $city->name])->toArray();
+         // Defina a chave do cache utilizando o estado como parte da chave
+        $cacheKey = 'cities_for_state_' . $this->form->state;
+
+        // Cache o resultado da consulta
+        $cities = Cache::remember($cacheKey, 3600, function () {
+            return City::whereStateUf($this->form->state)
+                ->get()
+                ->map(fn($city) => ['value' => $city->id, 'label' => $city->name])
+                ->toArray();
+        });
+
+        return $cities;
     }
 }
