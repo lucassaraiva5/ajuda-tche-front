@@ -161,6 +161,11 @@
                                     </x-input-group-inline>
                                 </div>
                             </div>
+                            <div class="mt-12 md:mt-32 grid grid-cols-1 gap-y-5">
+                                    <x-checkbox-input wire:model="form.agree_true_data" name="form.agree_true_data"
+                                                      label="Declaro estar de inteira responsabilidade pelas informações prestadas, estando ciente de que a falsidade nas informações acima implicará nas penalidades cabíveis."
+                                                      value="true" :required="true"/>
+                            </div>
                             <div class="sm:col-span-2 mt-16 flex justify-end">
                                 <a href="#"
                                    class="inline-flex items-center justify-center px-6 py-3 mt-2 text-base font-semibold text-gray-900 transition-all duration-200 bg-white border border-transparent rounded-full focus:outline-none hover:bg-gray-100 focus:bg-blue-700">

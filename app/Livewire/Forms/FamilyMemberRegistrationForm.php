@@ -7,7 +7,6 @@ use Livewire\Form;
 
 class FamilyMemberRegistrationForm extends Form
 {
-    #[Validate('required|cpf')]
     public string $cpf_nis_member = '';
 
     #[Validate('required')]
