@@ -11,6 +11,8 @@
                         </div>
 
                         <form wire:submit.prevent="save">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+
                             <div class="px-1" x-data>
                                 <p class="font-semibold text-gray-700 text-uppercase mb-7">INFORMAÇÕES DO CHEFE DA FAMÍLIA</p>
                                 <div class="grid w-full grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
@@ -47,12 +49,12 @@
                                         <div class="hidden md:block mt-6 mb-6">
                                             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                                    <tr>
-                                                        <th scope="col" class="px-6 py-3">Nome</th>
-                                                        <th scope="col" class="px-6 py-3">Data de Nascimento</th>
-                                                        <th scope="col" class="px-6 py-3">CPF/NIS</th>
-                                                        <th scope="col" class="px-6 py-3">Ações</th>
-                                                    </tr>
+                                                <tr>
+                                                    <th scope="col" class="px-6 py-3">Nome</th>
+                                                    <th scope="col" class="px-6 py-3">Data de Nascimento</th>
+                                                    <th scope="col" class="px-6 py-3">CPF/NIS</th>
+                                                    <th scope="col" class="px-6 py-3">Ações</th>
+                                                </tr>
                                                 </thead>
                                                 <tbody>
                                                 @foreach($this->familyMembers as $index => $member)
@@ -142,21 +144,21 @@
                                     </div>
                                     <x-text-input wire:model="form.complement" name="form.complement" label="Complemento" placeholder="Complemento"/>
                                     <x-text-input wire:model="form.neighborhood" name="form.neighborhood" label="Bairro" placeholder="Bairro" :required="true"/>
-                                    <x-select-input wire:model.live="selectedState" wire:model="form.state" name="form.state" label="Estado" placeholder="Selecione o estado" :required="true" :options="$states" selected="RS"/>
-                                    <x-select-input wire:model.live="selectedCity" wire:key="{{ $selectedState }}" wire:model="form.city" label="Cidade" name="form.city" :required="true" :options="\App\Models\City::whereStateUf($selectedState)->get()->map(fn($city) => ['value' => $city->id, 'label' => $city->name])->toArray()"/>
-                                    
+                                    <x-select-input wire:model.live="form.state" wire:model="form.state" name="form.state" label="Estado" placeholder="Selecione o estado" :required="true" :options="$states"/>
+                                    <x-select-input wire:model.live="form.city" wire:key="{{ $this->form->state }}" wire:model="form.city" label="Cidade" name="form.city" :required="true" :options="$this->getStatesToSelectBox()"/>
+
                                 </div>
                             </div>
                             <div id="shelter_localization" class="mt-16">
                                 <p class="font-semibold text-gray-700 text-uppercase mb-7">LOCAL ONDE A FAMÍLIA ESTÁ AGORA</p>
                                 <div class="grid w-full grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
 
-                                <x-input-group-inline wrapperClass="md:col-span-2 min-h-[60px]" label="Local que está abrigado(a)">
-                                    <x-radio-input wire:model="form.shelter_location" name="form.shelter_location" label="Em Casa" value="Em casa"/>
-                                    <x-radio-input wire:model="form.shelter_location" name="form.shelter_location" label="Em um abrigo" value="Em um abrigo"/>
-                                    <x-radio-input wire:model="form.shelter_location" name="form.shelter_location" label="Na casa de familiares" value="Na casa de familiares"/>
-                                    <x-radio-input wire:model="form.shelter_location" name="form.shelter_location" label="Outro local" value="Outro local"/>
-                                </x-input-group-inline>                
+                                    <x-input-group-inline wrapperClass="md:col-span-2 min-h-[60px]" label="Local que está abrigado(a)">
+                                        <x-radio-input wire:model="form.shelter_location" name="form.shelter_location" label="Em Casa" value="Em casa"/>
+                                        <x-radio-input wire:model="form.shelter_location" name="form.shelter_location" label="Em um abrigo" value="Em um abrigo"/>
+                                        <x-radio-input wire:model="form.shelter_location" name="form.shelter_location" label="Na casa de familiares" value="Na casa de familiares"/>
+                                        <x-radio-input wire:model="form.shelter_location" name="form.shelter_location" label="Outro local" value="Outro local"/>
+                                    </x-input-group-inline>
                                 </div>
                             </div>
                             <div class="sm:col-span-2 mt-16 flex justify-end">
@@ -175,16 +177,4 @@
             </div>
         </div>
     </section>
-
-    @push('js')
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                let state = document.getElementById('form.state');
-                state.value = 'RS';
-                let city = document.getElementById('form.city');
-                city.value = '5005';
-            });
-     
-        </script>
-    @endpush
 </div>

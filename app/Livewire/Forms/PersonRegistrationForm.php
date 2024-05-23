@@ -30,15 +30,15 @@ class PersonRegistrationForm extends Form
     public string $remuneration = '';
     public string $cell_phone = '';
     public string $email = '';
-    public string $has_unique_registration = '';
+    public ?bool $has_unique_registration = null;
     public string $nis_number = '';
-    public string $bolsa_familia_beneficiary = '';
-    public string $volta_por_cima_beneficiary = '';
-    public string $city_beneficiary = '';
-    public string $access_social_kitchen = '';
+    public ?bool $bolsa_familia_beneficiary = null;
+    public ?bool $volta_por_cima_beneficiary = null;
+    public ?bool $city_beneficiary = null;
+    public ?bool $access_social_kitchen = null;
 
     public string $which_social_kitchen = '';
-    public string $has_disability = '';
+    public ?bool $has_disability = null;
 
     public string $disability_type = '';
 
@@ -53,11 +53,12 @@ class PersonRegistrationForm extends Form
     public string $complement = '';
     public string $neighborhood = '';
 
-    public string $state = '';
+    public string $state = 'RS';
 
     #[Validate('required')]
-    public string $city = '';
-    public string $its_at_the_same_address = '';
+    public int $city = 5005;
+
+    public ?bool $its_at_the_same_address = null;
     public string $shelter_state = '';
     public string $shelter_city = '';
     public string $shelter_location = '';
@@ -71,13 +72,13 @@ class PersonRegistrationForm extends Form
     public string $declared_situation = '';
 
     public array $immediate_needs = [];
-    public string $disabled_family_member = '';
+    public ?bool $disabled_family_member = null;
     public string $family_member_disability_type = '';
-    public string $receives_bpc = '';
-    public string $needs_healthcare = '';
+    public ?bool $receives_bpc = null;
+    public ?bool $needs_healthcare = null;
 
     public string $who_needs_healthcare = '';
-    public string $uses_continuous_medication = '';
+    public ?bool $uses_continuous_medication = null;
 
     public string $who_uses_continuous_medication = '';
 
@@ -97,7 +98,7 @@ class PersonRegistrationForm extends Form
         $data['housing_status'] = implode(',', $data['housing_status'] ?? []);
         DB::beginTransaction();
 
-        
+
         $formattedDate = Carbon::createFromFormat('d/m/Y', $this->birth_date)->format('Y-m-d');
         $data['birth_date'] = $formattedDate;
 

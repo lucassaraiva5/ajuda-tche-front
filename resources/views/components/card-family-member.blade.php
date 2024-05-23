@@ -21,14 +21,6 @@
         <p class="font-normal pr-4">CPF/NIS</p>
         <p class="font-bold pr-4">{{$cpf}}</p>
     </div>
-    <div class="flex mt-2">
-        <p class="font-normal pr-4">Ocupação</p>
-        <p class="font-bold pr-4">{{$occupation}}</p>
-    </div>
-    <div class="flex mt-2">
-        <p class="font-normal pr-4">Renda</p>
-        <p class="font-bold pr-4">{{$rent}}</p>
-    </div>
 
     <div class="absolute bottom-2 right-6 text[#4B5563]">
         <span class="mr-4" wire:click={{$next}}>&lt;</span> 1 de {{$total}} <span class="ml-4" wire:click={{$previus}}>&gt;</span>

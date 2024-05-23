@@ -32,14 +32,6 @@ class PersonRegistration extends Component
 
     public array $cities = [];
 
-    public $selectedState = 'RS';
-
-    public $selectedCity;
-
-    public $selectedStateShelter = 'RS';
-
-    public $selectedStateCity;
-
     #[Layout('layouts.app')]
     public function render(): Factory|\Illuminate\Foundation\Application|View|Application
     {
@@ -61,11 +53,6 @@ class PersonRegistration extends Component
             'states' => $states,
             'cities' => $this->cities
         ]);
-    }
-    public function updatedFormState()
-    {
-        $this->cities = City::where('state_uf', $this->form->state)->pluck('name', 'id')->toArray();
-        //$this->form->city = '';
     }
 
     /**
@@ -120,5 +107,10 @@ class PersonRegistration extends Component
     public function removeFamilyMember($index): void
     {
         Arr::forget($this->familyMembers, $index);
+    }
+
+    public function getStatesToSelectBox()
+    {
+        return City::whereStateUf($this->form->state)->get()->map(fn($city) => ['value' => $city->id, 'label' => $city->name])->toArray();
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\DisabledSession;
 use App\Livewire\LandingPage;
 use App\Livewire\PersonRegistration;
 use App\Livewire\Team;
