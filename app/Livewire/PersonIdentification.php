@@ -13,12 +13,14 @@ use Livewire\Component;
 
 class PersonIdentification extends Component
 {
-    #[Validate('required|cpf')]
-    public string $cpf = '';
-
-
-    #[Validate('required|date_format:d/m/Y')]
-    public string $birth_date = '';
+    public function rules(): array
+    {
+        return [
+            'cpf' => 'required|cpf',
+            'birth_date' => 'required|date_format:d/m/Y',
+            'g-recaptcha-response' => 'recaptcha',
+        ];
+    }
 
     #[Layout('layouts.app')]
     public function render(): Factory|\Illuminate\Foundation\Application|View|Application
