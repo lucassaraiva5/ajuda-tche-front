@@ -34,4 +34,10 @@ class Person extends Model
     {
         return abs(now()->diffInYears($this->birth_date));
     }
+
+    public function getProtocolAttribute(): string
+    {
+        return str($this->id)->padLeft(6, '0')
+            ->prepend("PROT-", $this->created_at->format('Ymd'), "-");
+    }
 }

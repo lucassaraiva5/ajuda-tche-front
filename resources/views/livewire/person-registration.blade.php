@@ -5,11 +5,9 @@
                 <div class="overflow-hidden bg-transparent md:bg-white rounded-xl">
                     <div class="md:px-12 md:py-16">
 
-                        <div class="col-6">
-                            <img src="{{ asset('imagens/header-sao-leopoldo.jpg')}}" alt="">
-                        </div>
+                        <img class="max-h-[120px] mx-auto" src="{{ asset('imagens/header-sao-leopoldo.jpg')}}" alt="">
 
-                        <div class="mb-16">
+                        <div class="my-16">
                             <img class="h-5" src="{{ asset('branding/logo.svg') }}" alt="{{ config('app.name') }}">
 
                             <h2 class="text-3xl mt-6 font-bold leading-tight text-gray-800">Cadastro de pessoa</h2>
@@ -159,17 +157,17 @@
                                 <div class="grid w-full grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
 
                                     <x-input-group-inline wrapperClass="md:col-span-2 min-h-[60px]" label="Local que está abrigado(a)">
-                                        <x-radio-input wire:model="form.shelter_location" name="form.shelter_location" label="Em Casa" value="Em casa"/>
-                                        <x-radio-input wire:model="form.shelter_location" name="form.shelter_location" label="Em um abrigo" value="Em um abrigo"/>
-                                        <x-radio-input wire:model="form.shelter_location" name="form.shelter_location" label="Na casa de familiares" value="Na casa de familiares"/>
-                                        <x-radio-input wire:model="form.shelter_location" name="form.shelter_location" label="Outro local" value="Outro local"/>
+                                        <x-radio-input wire:model="form.shelter_location" name="form.shelter_location" label="Em Casa" value="Em casa" :required="true"/>
+                                        <x-radio-input wire:model="form.shelter_location" name="form.shelter_location" label="Em um abrigo" value="Em um abrigo" :required="true"/>
+                                        <x-radio-input wire:model="form.shelter_location" name="form.shelter_location" label="Na casa de familiares" value="Na casa de familiares" :required="true"/>
+                                        <x-radio-input wire:model="form.shelter_location" name="form.shelter_location" label="Outro local" value="Outro local" :required="true"/>
                                     </x-input-group-inline>
                                 </div>
                             </div>
-                            <div class="mt-12 md:mt-32 grid grid-cols-1 gap-y-5">
-                                    <x-checkbox-input wire:model="form.agree_true_data" name="form.agree_true_data"
-                                                      label="Declaro estar de inteira responsabilidade pelas informações prestadas, estando ciente de que a falsidade nas informações acima implicará nas penalidades cabíveis."
-                                                      value="true" :required="true"/>
+                            <div class="mt-12 grid grid-cols-1 gap-y-5">
+                                <x-checkbox-input wire:model="form.agree_true_data" name="form.agree_true_data"
+                                                  label="Declaro estar de inteira responsabilidade pelas informações prestadas, estando ciente de que a falsidade nas informações acima implicará nas penalidades cabíveis."
+                                                  value="true" :required="true"/>
                             </div>
                             <div class="sm:col-span-2 mt-16 flex justify-end">
                                 <a href="#"

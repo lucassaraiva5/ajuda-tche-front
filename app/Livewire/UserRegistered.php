@@ -7,6 +7,7 @@ use App\Enums\Relation;
 use App\Livewire\Forms\FamilyMemberRegistrationForm;
 use App\Livewire\Forms\PersonRegistrationForm;
 use App\Models\FamilyMember;
+use App\Models\Person;
 use App\Models\State;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -20,10 +21,19 @@ use Livewire\Component;
 
 class UserRegistered extends Component
 {
+    public ?string $protocol = '';
+
+    public function mount(): void
+    {
+        $hash = request()->get('hash');
+
+        $person = Person::query()->find(decrypt($hash));
+        $this->protocol = $person?->protocol;
+    }
+
     #[Layout('layouts.app')]
     public function render(): Factory|\Illuminate\Foundation\Application|View|Application
     {
-        $protocol = session('protocol');
-        return view('livewire.user-registered', [$protocol]);
+        return view('livewire.user-registered');
     }
 }

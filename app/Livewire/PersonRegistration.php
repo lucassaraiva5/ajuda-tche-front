@@ -8,15 +8,14 @@ use App\Livewire\Forms\FamilyMemberRegistrationForm;
 use App\Livewire\Forms\PersonRegistrationForm;
 use App\Models\City;
 use App\Models\FamilyMember;
+use App\Models\Person;
 use App\Models\State;
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -33,6 +32,26 @@ class PersonRegistration extends Component
     public array $familyMembers = [];
 
     public array $cities = [];
+
+    public function mount(): void
+    {
+        if (request()->has('hash')) {
+            $record = Person::query()->find(decrypt(request()->get('hash')));
+
+            $this->form->fill($record->toArray());
+            $this->form->birth_date = Carbon::createFromFormat('Y-m-d', $record->birth_date)->format('d/m/Y');
+
+            $this->familyMembers = $record->familyMembers
+                ->map(function ($familyMember) {
+                    $familyMember->birth_date_member = Carbon::createFromFormat('Y-m-d', $familyMember->birth_date_member)->format('d/m/Y');
+
+                    return $familyMember;
+                })
+                ->toArray();
+        } else {
+            $this->redirect(route('home'));
+        }
+    }
 
     #[Layout('layouts.app')]
     public function render(): Factory|\Illuminate\Foundation\Application|View|Application
@@ -68,25 +87,18 @@ class PersonRegistration extends Component
         $this->closeFamilyMemberForm();
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function save()
     {
-       $id =  $this->form->store(
+       $person = $this->form->store(
             collect($this->familyMembers)
                 ->map(fn($familyMember) => new FamilyMember($familyMember))
         );
 
-        $protocol = $this->generateProtocolNumber($id);
-        Session::flash('protocol', $protocol);
-
         return redirect()
-            ->route('user-registered');
-    }
-
-    public function generateProtocolNumber($id) {
-        $prefix = "PROT";
-        $date = date('Ymd');
-        $protocolNumber = $prefix . '-' . $date . '-' . str_pad($id, 6, '0', STR_PAD_LEFT);
-        return $protocolNumber;
+            ->route('user-registered', ['hash' => encrypt($person->id)]);
     }
 
     public function openFamilyMemberForm(): void
@@ -127,13 +139,11 @@ class PersonRegistration extends Component
         $cacheKey = 'cities_for_state_' . $this->form->state;
 
         // Cache o resultado da consulta
-        $cities = Cache::remember($cacheKey, 86400, function () {
+        return Cache::remember($cacheKey, 86400, function () {
             return City::whereStateUf($this->form->state)
                 ->get()
                 ->map(fn($city) => ['value' => $city->id, 'label' => $city->name])
                 ->toArray();
         });
-
-        return $cities;
     }
 }

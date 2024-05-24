@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Middleware\DisabledSession;
-use App\Livewire\LandingPage;
+use App\Livewire\PersonIdentification;
 use App\Livewire\PersonRegistration;
 use App\Livewire\Team;
 use App\Livewire\TermUse;
@@ -19,8 +18,14 @@ Route::get('/', function () {
 Route::get('/time', Team::class)
     ->name('team');
 
+Route::get('/identificacao', PersonIdentification::class)
+    ->name('person-identification');
+
 Route::get('/cadastrar', PersonRegistration::class)
     ->name('person-registration');
+
+Route::get('/editar', PersonRegistration::class)
+    ->name('person-update');
 
 Route::get('/sucesso', UserRegistered::class)
     ->name('user-registered');
