@@ -48,6 +48,8 @@ class PersonRegistration extends Component
                     return $familyMember;
                 })
                 ->toArray();
+        } else if (request()->path() === 'editar' && !request()->has('hash')) {
+            $this->redirect(route('home'));
         }
     }
 
