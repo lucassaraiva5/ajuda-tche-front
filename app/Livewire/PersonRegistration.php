@@ -48,8 +48,6 @@ class PersonRegistration extends Component
                     return $familyMember;
                 })
                 ->toArray();
-        } else {
-            $this->redirect(route('home'));
         }
     }
 
