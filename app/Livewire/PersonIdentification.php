@@ -13,12 +13,18 @@ use Livewire\Component;
 
 class PersonIdentification extends Component
 {
+    public string $cpf = '';
+
+    public string $birth_date = '';
+
+    public string $g_recaptcha_response = '';
+
     public function rules(): array
     {
         return [
-            'cpf' => 'required|cpf',
-            'birth_date' => 'required|date_format:d/m/Y',
-            'g-recaptcha-response' => 'recaptcha',
+            'cpf' => ['required', 'cpf'],
+            'birth_date' => ['required', 'date_format:d/m/Y'],
+            'g-recaptcha-response' => ['recaptcha'],
         ];
     }
 
