@@ -85,7 +85,7 @@ class PersonRegistrationForm extends Form
         $formattedDate = Carbon::createFromFormat('d/m/Y', $this->birth_date)->format('Y-m-d');
         $data['birth_date'] = $formattedDate;
 
-        $person = $this->id == null ? new Person() : Person::query()->find($this->id)->fill($data);
+        $person = $this->id == null ? new Person($data) : Person::query()->find($this->id)->fill($data);
         $person->save();
 
         /** @var Collection $membersHasAdded */
