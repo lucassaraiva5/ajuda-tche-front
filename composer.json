@@ -6,7 +6,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "biscolab/laravel-recaptcha": "^6.1",
         "canducci/cep": "^3.1",
         "filament/filament": "^3.2",
         "laravel/framework": "^11.0",

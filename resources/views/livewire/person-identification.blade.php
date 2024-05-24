@@ -13,19 +13,41 @@
                             <h2 class="text-3xl mt-6 font-bold leading-tight text-gray-800">Consultar cadastro</h2>
                         </div>
 
-                        <form wire:submit.prevent="save">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+                        <form
+                            @submit.prevent="doCaptcha"
+                            x-data="{
+                                siteKey: @js(config('recaptcha.site_key')),
+                                init() {
+                                    // load our recaptcha.
+                                    if (!window.recaptcha) {
+                                        const script = document.createElement('script');
+                                        script.src = 'https://www.google.com/recaptcha/api.js?render=' + this.siteKey;
+                                        document.body.append(script);
+                                    }
+                                },
 
-                            <div x-data>
-                                <div class="grid w-full grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
+                                doCaptcha() {
+                                    grecaptcha.execute(this.siteKey, {action: 'submit'}).then(token => {
+                                        Livewire.dispatch('saved', {token: token});
+                                    });
+                                },
+                            }">
+                            @csrf
+
+                            <div class="grid w-full grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
+                                <div>
                                     <x-text-input wire:model="cpf" name="cpf"
                                                   label="CPF" placeholder="CPF" x-mask="999.999.999-99"
                                                   :required="true"/>
-                                    <x-text-input wire:model="birth_date" name="birth_date"
-                                                  label="Data de nascimento" placeholder="DD/MM/AAAA"
-                                                  x-mask="99/99/9999" :required="true"/>
-                                    {!! htmlFormSnippet() !!}
+
+                                    @error('recaptcha')
+                                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
                                 </div>
+
+                                <x-text-input wire:model="birth_date" name="birth_date"
+                                              label="Data de nascimento" placeholder="DD/MM/AAAA"
+                                              x-mask="99/99/9999" :required="true"/>
                             </div>
 
                             <div class="sm:col-span-2 mt-16 flex justify-end">
