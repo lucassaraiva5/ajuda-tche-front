@@ -78,7 +78,7 @@ class PersonRegistrationForm extends Form
     {
         $this->validate();
 
-        $data = $this->except(['agree_true_data']);
+        $data = $this->except(['id', 'agree_true_data']);
 
         DB::beginTransaction();
 
