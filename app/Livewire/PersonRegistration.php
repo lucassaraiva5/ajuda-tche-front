@@ -131,6 +131,9 @@ class PersonRegistration extends Component
     public function removeFamilyMember($index): void
     {
         Arr::forget($this->familyMembers, $index);
+
+        // Realiza um reindex no array
+        $this->familyMembers = array_values($this->familyMembers);
     }
 
     public function getStatesToSelectBox()

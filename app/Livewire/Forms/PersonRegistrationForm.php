@@ -88,35 +88,35 @@ class PersonRegistrationForm extends Form
         $person = $this->id == null ? new Person() : Person::query()->find($this->id)->fill($data);
         $person->save();
 
-        /** @var Collection $familyMembersHasAdded */
-        $familyMembersHasAdded = $this->id != null ? FamilyMember::query()->where('person_id', $this->id)->get() : collect();
+        /** @var Collection $membersHasAdded */
+        $membersHasAdded = $this->id != null ? FamilyMember::query()->where('person_id', $this->id)->get() : collect();
 
         // Se existe membro da família que já foi cadastrado antes e não está mais, então remove-os
-        if ($familyMembersHasAdded->isNotEmpty()) {
-            $familyMembersHasAdded->each(function (FamilyMember $familyMember) use ($membersOfFamily) {
-                if ($membersOfFamily->where('cpf_or_nis', $familyMember->cpf_or_nis)->isEmpty()) {
-                    $familyMember->delete();
+        if ($membersHasAdded->isNotEmpty()) {
+            $membersHasAdded->each(function (FamilyMember $addedMember) use ($membersOfFamily) {
+                if ($membersOfFamily->where('id', $addedMember->id)->isEmpty()) {
+                    $addedMember->delete();
                 }
             });
         }
 
-        $membersOfFamily->each(function (FamilyMember $familyMember) use ($person, $familyMembersHasAdded) {
-            /** @var ?FamilyMember $familyMemberHasAdded */
-            $familyMemberHasAdded = $familyMembersHasAdded->where('cpf_or_nis', $familyMember->cpf_or_nis)->first();
-
-            if (isset($familyMember->birth_date_member)) {
-                $formattedDate = Carbon::createFromFormat('d/m/Y', $familyMember->birth_date_member)->format('Y-m-d');
-                $familyMember->birth_date_member = $formattedDate;
+        $membersOfFamily->each(function (FamilyMember $member) use ($person, $membersHasAdded) {
+            // Faz o tratamento de conversão de datas
+            if (isset($member->birth_date_member)) {
+                $member->birth_date_member = Carbon::createFromFormat('d/m/Y', $member->birth_date_member)->format('Y-m-d');
             }
+
+            /** @var ?FamilyMember $added */
+            $added = $membersHasAdded->where('id', $member->id)->first();
 
             // Tive que fazer desse jeito, por problemas no save()...
             // Não é a melhor maneira, mas foi a mais rápida :)
-            if ($familyMemberHasAdded != null) {
-                $familyMemberHasAdded->fill($familyMember->toArray());
-                $familyMemberHasAdded->save();
+            if ($added != null) {
+                $added->fill(collect($member->toArray())->except(['id', 'created_at', 'updated_at', 'deleted_at'])->toArray());
+                $added->save();
             } else {
-                $familyMember->person()->associate($person);
-                $familyMember->save();
+                $member->person()->associate($person);
+                $member->save();
             }
         });
 
