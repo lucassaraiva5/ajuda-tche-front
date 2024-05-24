@@ -24,6 +24,7 @@
                                     <x-text-input wire:model="birth_date" name="birth_date"
                                                   label="Data de nascimento" placeholder="DD/MM/AAAA"
                                                   x-mask="99/99/9999" :required="true"/>
+                                    {!! htmlFormSnippet() !!}
                                 </div>
                             </div>
 
