@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\DefaultController;
 use App\Livewire\PersonIdentification;
 use App\Livewire\PersonRegistration;
 use App\Livewire\Team;
@@ -26,6 +28,9 @@ Route::get('/cadastrar', PersonRegistration::class)
 
 Route::get('/editar', PersonRegistration::class)
     ->name('person-update');
+
+Route::get('/gerar-excel', [DefaultController::class, 'export'])
+    ->name('export');
 
 Route::get('/sucesso', UserRegistered::class)
     ->name('user-registered');
