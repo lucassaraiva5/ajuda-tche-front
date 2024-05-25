@@ -119,8 +119,7 @@
         <div class="voluntarios row p-3">
             <h4 id="voluntarios">Pessoas que fizeram tudo isso acontecer</h4>
             <h1>Agradecimentos aos voluntários:</h1>
-            <ul class="col-lg-4">
-                <li>
+             <div class="col-lg-4">
                     <a href="https://www.linkedin.com/in/ramonsl/" target="_blank"><i class="fab fa-linkedin"></i> Ramon
                         Lummertz</a>
                     <a href="https://www.linkedin.com/in/andrezzaandrade/" target="_blank"><i
@@ -130,9 +129,11 @@
                             class="fab fa-linkedin"></i> Juliano Ramos</a>
                     <a href="https://www.linkedin.com/in/lucassaraiva5/" target="_blank"><i class="fab fa-linkedin"></i>
                         Lucas Saraiva</a>
-                    <br>
+            </div>
+            <div class="col-lg-4">
                     <a href="https://www.linkedin.com/in/tiagoabadedias/" target="_blank"><i
-                            class="fab fa-linkedin"></i> Tiago Abade</a>
+                            class="fab fa-linkedin"></i>
+                        Tiago Abade</a>
                     <a href="https://www.linkedin.com/in/daniel-souza-729aa3183/" target="_blank"><i
                             class="fab fa-linkedin"></i> Daniel Souza</a>
                     <br>
@@ -140,21 +141,16 @@
                             class="fab fa-linkedin"></i> Larissa Carlos</a>
                     <a href="https://www.linkedin.com/in/ana-caroline-w-moreto-23818225b/" target="_blank"><i
                             class="fab fa-linkedin"></i> Ana Caroline</a>
-                </li>
-            </ul>
-            <ul class="col-lg-4">
-                <li>
+            </div>
+            <div class="col-lg-4">
                     <a href="https://www.linkedin.com/in/suelen-daitx-a912561a0/" target="_blank"><i
                             class="fab fa-linkedin"></i> Suelen Daitx</a>
+                    <a href="https://www.linkedin.com/in/paulohoffmeister/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+                        target="_blank"><i class="fab fa-linkedin"></i> Paulo Hoffmeister</a>
                     <br>
-                    <a href="https://www.linkedin.com/in/paulohoffmeister/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank"><i
-                            class="fab fa-linkedin"></i> Paulo Hoffmeister</a>
-                    <br>
-                    <a href="https://www.linkedin.com/in/dudu-marques/" target="_blank"><i
-                            class="fab fa-linkedin"></i> Eduardo Marques</a>
-                    <br>
-                </li>
-            </ul>
+                    <a href="https://www.linkedin.com/in/dudu-marques/" target="_blank"><i class="fab fa-linkedin"></i>
+                        Eduardo Marques</a>
+            </div>
         </div>
     </main>
 
