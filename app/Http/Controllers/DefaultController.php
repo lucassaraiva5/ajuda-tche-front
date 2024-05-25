@@ -11,6 +11,8 @@ class DefaultController extends Controller
 {
     public function export()
     {
+        ini_set('memory_limit', '2048M');
+
         $peopleArray = [];
         $people = Person::with('familyMembers')->get();
         foreach ($people as $person) {
