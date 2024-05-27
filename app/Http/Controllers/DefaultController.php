@@ -15,9 +15,9 @@ class DefaultController extends Controller
 
         $peopleArray = [];
         $people = Person::with(['familyMembers' => function ($query) {
-            $query->where('updated_at', '>', '2024-05-25 18:46:43');
+            //$query->where('updated_at', '>', '2024-05-25 18:46:43');
         }])
-        ->where('updated_at', '>', '2024-05-25 18:46:43')
+        //->where('updated_at', '>', '2024-05-25 18:46:43')
         ->get();
         
         foreach ($people as $person) {
