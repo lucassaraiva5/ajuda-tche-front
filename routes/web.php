@@ -29,8 +29,8 @@ Route::get('/cadastrar', PersonRegistration::class)
 Route::get('/editar', PersonRegistration::class)
     ->name('person-update');
 
-// Route::get('/gerar-excel', [DefaultController::class, 'export'])
-//     ->name('export');
+Route::get('/gerar-excel', [DefaultController::class, 'export'])
+    ->name('export');
 
 Route::get('/sucesso', UserRegistered::class)
     ->name('user-registered');
