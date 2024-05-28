@@ -9,8 +9,7 @@ use Maatwebsite\Excel\Facades\Excel;
  
 class DefaultController extends Controller
 {
-    public function export()
-    {
+    public static function generateArray() {
         ini_set('memory_limit', '2048M');
 
         $peopleArray = [];
@@ -44,8 +43,12 @@ class DefaultController extends Controller
             $peopleArray[] = $personArray;
         }
 
+        $peopleArray;
 
         return Excel::download(new DataExport($peopleArray), 'users.xlsx');
-
+    }
+    public function export()
+    {
+        return DefaultController::generateArray();
     }
 }

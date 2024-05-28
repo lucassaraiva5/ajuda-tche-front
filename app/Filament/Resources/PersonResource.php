@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PersonResource\Pages;
+use App\Http\Controllers\DefaultController;
 use App\Models\Person;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\TextColumn;
@@ -69,11 +70,9 @@ class PersonResource extends Resource
             ->headerActions([
                 ExportAction::make()
                     ->label('Exportar para Excel')
-                    ->exports([
-                        ExcelExport::make('table')
-                            ->fromModel()
-                            ->withFilename(fn($resource) => $resource::getLabel()),
-                    ])
+                    ->action(function() {
+                        return DefaultController::generateArray();
+                    })
             ]);
     }
 
