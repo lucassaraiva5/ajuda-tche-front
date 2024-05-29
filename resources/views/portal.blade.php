@@ -181,9 +181,10 @@
         </div>
     </footer>
 
-    <div class="logo row">
+    <div class="logo row p-5">
         <div class="col-6">
-            <img src="{{ asset('imagens/logo-curso.jpg')}}" alt="">
+            <a target="_blank" href="https://www.ulbra.br/torres/graduacao/presencial/analise-e-desenvolvimento-de-sistemas/superior-de-tecnologia"><img src="{{ asset('./imagens/logo-curso.jpg')}}" alt="Logo curso ADS"></a>
+            <a target="_blank" href="https://www.ulbra.br/"><img src="{{ asset('./imagens/ULBRA-logo.png')}}" alt="Logo ULBRA"></a>
         </div>
 
         <div class="col-6">
