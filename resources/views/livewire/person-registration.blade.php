@@ -6,6 +6,7 @@
                     <div class="md:px-12 md:py-16">
 
                         <img class="max-h-[120px] mx-auto" src="{{ asset('imagens/header-sao-leopoldo.jpg')}}" alt="">
+                        <img class="max-h-[120px] mx-auto" src="{{ asset('imagens/ULBRA-logo.png')}}" alt="">
 
                         <div class="my-16">
                             <img class="h-5" src="{{ asset('branding/logo.svg') }}" alt="{{ config('app.name') }}">
