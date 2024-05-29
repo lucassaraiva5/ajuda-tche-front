@@ -65,12 +65,9 @@ function createCards(data) {
 function createCardsType(tipo) {
     const cardsContainer = document.getElementById('container');
 
-    fetch(jsonFilePath)
-        .then(response => response.json())
-        .then(data => {
             cardsContainer.innerHTML = ''; // Limpa apenas os cartões, mantendo os quadrados
             let icon = ''
-            data.forEach(function (item) {
+            json.forEach(function (item) {
                 if (item.tipo && item.tipo.toLowerCase() === tipo.toLowerCase()) {
                     const card = document.createElement('div');
                     card.classList.add('box');
@@ -102,17 +99,7 @@ function createCardsType(tipo) {
                     }
 
                     console.log(item.tipo.toLowerCase())
-                    // if (item.tipo.toLowerCase() === 'ajudatche') {
-                    //     card.innerHTML += `
-                    //     <div class="square">
-                    //     <img src="./imagens/${icon}.svg">
-                    //     </div>
-                    //
-                    //     <h3>${item.titulo}</h3>
-                    //     <p>${item.descricao}</p>
-                    //     <a class="ver-mais" target="_blank" href="/cadastro">Saiba mais </a>
-                    // `;
-                    // } else {
+                    
                         card.innerHTML += `
                         <div class="square">
                         <img src="./imagens/${icon}.png">
@@ -127,16 +114,12 @@ function createCardsType(tipo) {
                     cardsContainer.appendChild(card);
                 }
             });
-        });
-}
+        }
+//     );
+// }
 
 const json = [
-    // {
-    //     "titulo": "Cadastre-se ajudatchê",
-    //     "descricao": "Cadastre-se para auxílio e mapeamento de benefícios socias",
-    //     "link": "",
-    //     "tipo": "ajudatche"
-    // },
+ 
     {
         "titulo": "Carteira de Identidade",
         "descricao": "Emitir segunda via da Carteira de identidade",
