@@ -393,17 +393,17 @@ footer {
     align-items: center;
     background-color: #ffffff;
     color: #333333;
-    height: 150px;
+    /*height: 150px;
     padding: 2rem 3rem;
     margin-bottom: 30px;
     margin-left: 60px;
-    margin-right: 80px;
+    margin-right: 80px;*/
 }
 
 .logo img {
-    /* margin-right: 10px; */
+    margin-right: 10px;
     /* Espaçamento entre o logo e as redes sociais */
-    height: 100px;
+    height: 80px;
 }
 
 .social-icons {
@@ -552,29 +552,14 @@ footer {
         margin-right: 25px;
     }
 
-
-    .logo{
-        height: 250px;
-    }
-
     .logo img{
-        height: 100px;
-        margin-bottom: 280px;
+        height: 80px;
     }
     .footer img {
         margin-top: 25px;
         width: 90%;
         margin-left: 30px;
     }
-
-    .social-icons{
-        margin-bottom: 280px;
-        margin-left: 100px;
-    }
-
-    /* .dropdown-menu{
-        width: 200px;
-    } */
 
 }
 
