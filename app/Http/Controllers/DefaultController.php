@@ -11,6 +11,7 @@ class DefaultController extends Controller
 {
     public static function generateArray() {
         ini_set('memory_limit', '2048M');
+        ini_set('max_execution_time', '-1');
 
         $peopleArray = [];
         $people = Person::with(['familyMembers' => function ($query) {
