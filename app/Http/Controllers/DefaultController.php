@@ -23,6 +23,7 @@ class DefaultController extends Controller
         foreach ($people as $person) {
             $personArray = [];
 
+            $personArray["data_ultima_atualizacao"] = $person->updated_at;
             $personArray["cpf_responsavel"] = $person->cpf;
             $personArray["nome_responsavel"] = $person->civil_name;
             $personArray["logradouro"] = $person->street;
